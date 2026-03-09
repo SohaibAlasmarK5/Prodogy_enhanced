@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodigy Ventilation Systems</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="src/imports/logo.png" alt="Prodigy Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-brand">PRODIGY</span>
+                        <span class="logo-subtitle">Ventilation Systems</span>
+                    </div>
+                </div>
+                <nav class="nav" id="mainNav">
+                    <a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a>
+                    
+                    <div class="nav-dropdown">
+                        <button class="nav-link dropdown-toggle">
+                            <span data-en="Technical Support" data-ar="الدعم الفني">Technical Support</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item" data-en="Fan Selector Tool" data-ar="أداة تحديد المروحة">Fan Selector Tool</a>
+                            <a href="#" class="dropdown-item" data-en="ESP Calculator" data-ar="ESP حاسبة">ESP Calculator</a>
+                            <a href="#" class="dropdown-item" data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow Calculator</a>
+                            <a href="#" class="dropdown-item primary-text" data-en="Download Catalogue" data-ar="تحميل الدليل">Download Catalogue</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-dropdown">
+                        <button class="nav-link dropdown-toggle">
+                            <span data-en="Products" data-ar="المنتجات">Products</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu products-menu">
+                            <div class="products-grid">
+                                <div>
+                                    <div class="product-header" data-en="Commercial" data-ar="تجاري">Commercial</div>
+                                    <a href="#" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="#" class="dropdown-item" data-en="Cabinet Fan" data-ar="مروحة خزانة">Cabinet Fan</a>
+                                </div>
+                                <div>
+                                    <div class="product-header" data-en="Residential" data-ar="سكني">Residential</div>
+                                    <a href="#" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="#" class="dropdown-item" data-en="Window Fan" data-ar="مروحة نافذة">Window Fan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#about" class="nav-link" data-en="About Us" data-ar="من نحن">About Us</a>
+                </nav>
+                <div class="header-controls">
+                    <button id="themeToggle" class="control-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="languageToggle" class="control-btn lang-btn" data-lang="ar">
+                        العربية
+                    </button>
+                    <button class="btn btn-primary" data-en="Get Quote" data-ar="احصل على عرض">Get Quote</button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section id="home" class="hero-slider">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503518646760-43090c4b8d55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920');">
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title" data-en="Clean Air Starts with Prodigy" data-ar="الهواء النظيف يبدأ مع بروديجي">Clean Air Starts with Prodigy</h1>
+                        <p class="slide-description" data-en="Advanced ventilation engineered for everyday spaces." data-ar="تهوية متقدمة مصممة للمساحات اليومية">Advanced ventilation engineered for everyday spaces.</p>
+                        <button class="btn btn-primary btn-lg">
+                            <span data-en="View Products" data-ar="عرض المنتجات">View Products</span> <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1769006708689-afe6f69b4f76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920');">
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title" data-en="Efficient Ventilation Solutions" data-ar="حلول التهوية الفعالة">Efficient Ventilation Solutions</h1>
+                        <p class="slide-description" data-en="Innovative products designed to improve air quality." data-ar="منتجات مبتكرة لتحسين جودة الهواء">Innovative products designed to improve air quality.</p>
+                        <button class="btn btn-primary btn-lg">
+                            <span data-en="View Products" data-ar="عرض المنتجات">View Products</span> <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1758545814875-c2f0a0c89943?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920');">
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="slide-title" data-en="Smart Air Control" data-ar="تحكم ذكي بالهواء">Smart Air Control</h1>
+                        <p class="slide-description" data-en="Comfortable and energy-efficient ventilation for your spaces." data-ar="تهوية مريحة وموفرة للطاقة لمساحاتك">Comfortable and energy-efficient ventilation for your spaces.</p>
+                        <button class="btn btn-primary btn-lg">
+                            <span data-en="View Products" data-ar="عرض المنتجات">View Products</span> <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-btn prev-btn" id="prevSlide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn" id="nextSlide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label" data-en="Years Experience" data-ar="سنوات الخبرة">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label" data-en="Projects Completed" data-ar="مشاريع منجزة">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label" data-en="Client Satisfaction" data-ar="رضا العملاء">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Prodigy Ventilation Systems</h2>
+                <p class="section-description">
+                    Prodigy Ventilation Systems is a leading manufacturer of advanced ventilation fans and fresh air systems, proudly headquartered in Fujairah, United Arab Emirates.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <i class="fas fa-globe icon-primary"></i>
+                            <h3>Global Standards</h3>
+                        </div>
+                        <p>
+                            Our products are internationally certified to meet the highest benchmarks, including CCC, CE, SAA, and CVC, ensuring compliance, safety, and reliability across global markets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <i class="fas fa-lightbulb icon-primary"></i>
+                            <h3>Innovation</h3>
+                        </div>
+                        <p>
+                            Since its establishment, Prodigy has been driven by innovation—continuously expanding its product range, refining designs, and developing utility models that keep pace with evolving industry needs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <i class="fas fa-check-circle icon-primary"></i>
+                            <h3>Quality-First</h3>
+                        </div>
+                        <p>
+                            At Prodigy, we believe quality is everyone's responsibility. Guided by our "quality-first" philosophy, we focus on excellence in every detail, earning the trust and recognition of our clients.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <i class="fas fa-user-check icon-primary"></i>
+                            <h3>Tailored Solutions</h3>
+                        </div>
+                        <p>
+                            We provide professional, personalized, and complete ventilation solutions, carefully designed to meet the unique requirements of every client and project.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-description">
+                    Comprehensive ventilation solutions tailored to your needs
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3>Industrial Ventilation</h3>
+                        <p>High-capacity ventilation systems for factories, warehouses, and industrial facilities.</p>
+                        <ul class="service-list">
+                            <li>Custom system design</li>
+                            <li>Energy-efficient solutions</li>
+                            <li>Compliance with regulations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Commercial HVAC</h3>
+                        <p>Complete HVAC solutions for offices, retail spaces, and commercial buildings.</p>
+                        <ul class="service-list">
+                            <li>Climate control systems</li>
+                            <li>Air quality management</li>
+                            <li>Preventive maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>Maintenance & Repair</h3>
+                        <p>Professional maintenance and repair services to keep your systems running smoothly.</p>
+                        <ul class="service-list">
+                            <li>Regular inspections</li>
+                            <li>Emergency repairs</li>
+                            <li>System upgrades</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="features-content">
+                    <h2 class="section-title">Why Choose Us</h2>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Expert Team</h3>
+                            <p>Our certified technicians bring decades of combined experience to every project.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Quality Guarantee</h3>
+                            <p>We stand behind our work with comprehensive warranties and quality assurance.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Industry Leading</h3>
+                            <p>Recognized for excellence with multiple industry awards and certifications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-image">
+                    <img src="https://images.unsplash.com/photo-1647022528152-52ed9338611d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="HVAC system">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">
+                    Ready to improve your air quality? Contact us today for a free consultation
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-input" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-input" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <div class="contact-label">Phone</div>
+                            <div class="contact-value">+971 50 313 4010</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">info@prodigysystems.ae</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <div class="contact-label">Address</div>
+                            <div class="contact-value">
+                                Fujairah<br>
+                                United Arab Emirates
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="business-hours">
+                        <h4>Business Hours</h4>
+                        <div class="hours-list">
+                            <div>Monday - Friday: 8:00 AM - 6:00 PM</div>
+                            <div>Saturday: 9:00 AM - 4:00 PM</div>
+                            <div>Sunday: Closed</div>
+                            <div class="emergency-text">24/7 Emergency Service Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="src/imports/logo.png" alt="Prodigy Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <span class="logo-brand">PRODIGY</span>
+                            <span class="logo-subtitle">Ventilation Systems</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Professional ventilation solutions for a healthier environment.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Industrial Ventilation</a></li>
+                        <li><a href="#">Commercial HVAC</a></li>
+                        <li><a href="#">Maintenance & Repair</a></li>
+                        <li><a href="#">System Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@prodigysystems.ae">info@prodigysystems.ae</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            +971 50 313 4010
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            Fujairah, United Arab Emirates
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Prodigy Ventilation Systems. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
