@@ -110,7 +110,7 @@ body {
 }
 
 .logo-img {
-    width: 48px;
+    width: 58px;
     height: 48px;
 }
 
@@ -691,7 +691,7 @@ textarea.form-input {
 }
 
 .footer-logo-img {
-    width: 40px;
+    width: 50px;
     height: 40px;
 }
 
@@ -792,15 +792,15 @@ textarea.form-input {
     .nav {
         display: none;
     }
-    
+
     .menu-toggle {
         display: block;
     }
-    
+
     .header-controls {
         display: flex;
     }
-    
+
     .nav.active {
         display: flex;
         flex-direction: column;
@@ -819,35 +819,35 @@ textarea.form-input {
     .slide-title {
         font-size: 2rem;
     }
-    
+
     .slide-description {
         font-size: 1.125rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .features-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .features-image {
         order: -1;
     }
-    
+
     .products-menu {
         min-width: 300px;
     }
-    
+
     .products-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .header-controls .btn-primary {
         display: none;
     }
@@ -857,20 +857,20 @@ textarea.form-input {
     .hero-slider {
         height: 500px;
     }
-    
+
     .slide-title {
         font-size: 1.75rem;
     }
-    
+
     .slide-description {
         font-size: 1rem;
     }
-    
+
     .lang-btn {
         font-size: 0.75rem;
         padding: 0.4rem 0.6rem;
     }
-    
+
     .control-btn {
         width: 36px;
         height: 36px;
