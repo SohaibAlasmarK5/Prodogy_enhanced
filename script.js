@@ -1,3 +1,4 @@
+// Prodigy Ventilation Systems - Main JavaScript - v2024-final
 // Hero Slider
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
@@ -26,32 +27,41 @@ function prevSlide() {
 let slideInterval = setInterval(nextSlide, 5000);
 
 // Slider controls
-document.getElementById('nextSlide').addEventListener('click', () => {
-    clearInterval(slideInterval);
-    nextSlide();
-    slideInterval = setInterval(nextSlide, 5000);
-});
+const nextSlideBtn = document.getElementById('nextSlide');
+const prevSlideBtn = document.getElementById('prevSlide');
 
-document.getElementById('prevSlide').addEventListener('click', () => {
-    clearInterval(slideInterval);
-    prevSlide();
-    slideInterval = setInterval(nextSlide, 5000);
-});
+if (nextSlideBtn) {
+    nextSlideBtn.addEventListener('click', () => {
+        clearInterval(slideInterval);
+        nextSlide();
+        slideInterval = setInterval(nextSlide, 5000);
+    });
+}
+
+if (prevSlideBtn) {
+    prevSlideBtn.addEventListener('click', () => {
+        clearInterval(slideInterval);
+        prevSlide();
+        slideInterval = setInterval(nextSlide, 5000);
+    });
+}
 
 // Mobile Menu Toggle
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
 
-menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-});
+if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+    });
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) {
-        mainNav.classList.remove('active');
-    }
-});
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) {
+            mainNav.classList.remove('active');
+        }
+    });
+}
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -96,12 +106,28 @@ if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(contactForm);
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
         
-        // Here you would typically send the data to a server
-        // For now, we'll just show an alert
-        alert('Thank you for your message! We will get back to you soon.');
+        // Create mailto link
+        const subject = encodeURIComponent(`Contact from ${name}`);
+        const body = encodeURIComponent(
+            `Name: ${name}\n` +
+            `Email: ${email}\n` +
+            `Phone: ${phone}\n\n` +
+            `Message:\n${message}`
+        );
+        
+        const mailtoLink = `mailto:info@prodigysystems.ae?subject=${subject}&body=${body}`;
+        
+        // Open default email client
+        window.location.href = mailtoLink;
+        
+        // Show confirmation
+        alert('Opening your email client...');
         
         // Reset form
         contactForm.reset();
@@ -109,7 +135,19 @@ if (contactForm) {
 }
 
 // Set current year in footer
-document.getElementById('currentYear').textContent = new Date().getFullYear();
+const currentYearElement = document.getElementById('currentYear');
+if (currentYearElement) {
+    currentYearElement.textContent = new Date().getFullYear();
+}
+
+// Calculate dynamic years of experience (company started in 2024)
+const yearsExperienceElement = document.getElementById('yearsExperience');
+if (yearsExperienceElement) {
+    const startYear = 2024;
+    const currentYear = new Date().getFullYear();
+    const yearsInBusiness = currentYear - startYear;
+    yearsExperienceElement.textContent = yearsInBusiness + '+';
+}
 
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
@@ -118,23 +156,30 @@ const html = document.documentElement;
 // Load saved theme
 const savedTheme = localStorage.getItem('theme') || 'light';
 html.setAttribute('data-theme', savedTheme);
-updateThemeIcon(savedTheme);
+if (themeToggle) {
+    updateThemeIcon(savedTheme);
+}
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+}
 
 function updateThemeIcon(theme) {
+    if (!themeToggle) return;
     const icon = themeToggle.querySelector('i');
-    if (theme === 'dark') {
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
+    if (icon) {
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
     }
 }
 
@@ -144,28 +189,35 @@ let currentLang = localStorage.getItem('language') || 'en';
 
 // Set initial language
 document.documentElement.setAttribute('lang', currentLang);
-if (currentLang === 'ar') {
-    document.documentElement.setAttribute('dir', 'rtl');
-    updateLanguage('ar');
+document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+// Apply translations on page load
+updateLanguage(currentLang);
+
+// Update language button text on page load
+if (languageToggle) {
+    languageToggle.textContent = currentLang === 'en' ? 'العربية' : 'English';
 }
 
-languageToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'ar' : 'en';
-    
-    // Save to localStorage
-    localStorage.setItem('language', currentLang);
-    
-    // Update HTML attributes
-    document.documentElement.setAttribute('lang', currentLang);
-    document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
-    
-    // Update all text
-    updateLanguage(currentLang);
-    
-    // Update button text
-    languageToggle.textContent = currentLang === 'en' ? 'العربية' : 'English';
-    languageToggle.setAttribute('data-lang', currentLang === 'en' ? 'ar' : 'en');
-});
+if (languageToggle) {
+    languageToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'ar' : 'en';
+        
+        // Save to localStorage
+        localStorage.setItem('language', currentLang);
+        
+        // Update HTML attributes
+        document.documentElement.setAttribute('lang', currentLang);
+        document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+        
+        // Update all text
+        updateLanguage(currentLang);
+        
+        // Update button text
+        languageToggle.textContent = currentLang === 'en' ? 'العربية' : 'English';
+        languageToggle.setAttribute('data-lang', currentLang === 'en' ? 'ar' : 'en');
+    });
+}
 
 function updateLanguage(lang) {
     // Update all elements with data-en and data-ar attributes
@@ -174,12 +226,28 @@ function updateLanguage(lang) {
     elements.forEach(element => {
         const translation = element.getAttribute(`data-${lang}`);
         if (translation) {
-            element.textContent = translation;
+            // Special handling for option elements
+            if (element.tagName === 'OPTION') {
+                element.textContent = translation;
+            } else {
+                element.textContent = translation;
+            }
         }
     });
     
-    // Update button text
-    languageToggle.textContent = lang === 'en' ? 'العربية' : 'English';
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-en-placeholder][data-ar-placeholder]');
+    placeholderElements.forEach(element => {
+        const placeholderTranslation = element.getAttribute(`data-${lang}-placeholder`);
+        if (placeholderTranslation) {
+            element.placeholder = placeholderTranslation;
+        }
+    });
+    
+    // Update button text (only if languageToggle exists)
+    if (languageToggle) {
+        languageToggle.textContent = lang === 'en' ? 'العربية' : 'English';
+    }
 }
 
 // Add fade-in animation on scroll

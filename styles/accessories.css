@@ -1,0 +1,375 @@
+/* Accessories Page Styles */
+
+.accessories-main {
+    padding-top: 80px;
+    padding-bottom: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header Section */
+.accessories-header {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.accessories-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.accessories-header p {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Accessories Container */
+.accessories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 0 2rem;
+}
+
+/* Accessory Card */
+.accessory-card {
+    background: var(--color-card);
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .accessory-card {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+.accessory-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.15);
+}
+
+/* Accessory Image */
+.accessory-image {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--color-bg-light);
+    border-radius: 12px;
+}
+
+[data-theme="dark"] .accessory-image {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.accessory-image img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Accessory Content */
+.accessory-content h2 {
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.accessory-subtitle {
+    font-size: 1.3rem;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* Description Section */
+.accessory-description {
+    margin-bottom: 2.5rem;
+}
+
+.accessory-description h3 {
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.accessory-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+}
+
+.accessory-description ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.accessory-description ul li {
+    padding: 0.8rem 0 0.8rem 2rem;
+    position: relative;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.accessory-description ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Specifications Table */
+.accessory-specs {
+    margin-bottom: 2.5rem;
+}
+
+.accessory-specs h3 {
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.accessory-specs table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-card);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accessory-specs table thead {
+    background: var(--color-primary);
+    color: white;
+}
+
+.accessory-specs table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.accessory-specs table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1rem;
+}
+
+.accessory-specs table td:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+    width: 40%;
+}
+
+.accessory-specs table tr:last-child td {
+    border-bottom: none;
+}
+
+.accessory-specs table tbody tr:hover {
+    background: var(--color-bg-light);
+}
+
+[data-theme="dark"] .accessory-specs table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Applications Section */
+.accessory-applications {
+    margin-top: 2.5rem;
+}
+
+.accessory-applications h3 {
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.application-item {
+    background: var(--color-bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-primary);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .application-item {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.application-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+.application-item h4 {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.application-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+/* Working Principle */
+.working-principle {
+    background: var(--color-bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+[data-theme="dark"] .working-principle {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.principle-item {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.principle-item strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Materials Table */
+.materials-table {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.materials-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.materials-table td:first-child {
+    font-weight: 600;
+    color: var(--color-primary);
+    width: 35%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .accessories-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .accessories-header p {
+        font-size: 1.1rem;
+    }
+
+    .accessory-card {
+        padding: 2rem;
+    }
+
+    .accessory-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .accessories-main {
+        padding-top: 60px;
+    }
+
+    .accessories-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .accessories-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .accessories-header p {
+        font-size: 1rem;
+    }
+
+    .accessories-container {
+        gap: 2.5rem;
+        padding: 0 1rem;
+    }
+
+    .accessory-card {
+        padding: 1.5rem;
+    }
+
+    .accessory-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .accessory-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .accessory-description h3,
+    .accessory-specs h3,
+    .accessory-applications h3 {
+        font-size: 1.3rem;
+    }
+
+    .application-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .accessory-specs table {
+        font-size: 0.9rem;
+    }
+
+    .accessory-specs table th,
+    .accessory-specs table td {
+        padding: 0.7rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessories-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .accessory-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .accessory-description ul li {
+        font-size: 0.95rem;
+        padding-left: 1.5rem;
+    }
+
+    .accessory-specs table {
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Options Demo - Prodigy</title>
+    <link rel="icon" type="image/x-icon" href="../../Images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(198, 40, 40, 0.3);
+        }
+
+        .demo-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .layout-switcher {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .layout-switcher h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .switcher-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .layout-btn {
+            padding: 15px 25px;
+            border: 2px solid #c62828;
+            background: white;
+            color: #c62828;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .layout-btn:hover {
+            background: #c62828;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+        }
+
+        .layout-btn.active {
+            background: #c62828;
+            color: white;
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+        }
+
+        .layout-btn i {
+            margin-right: 8px;
+        }
+
+        .layout-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .layout-container.active {
+            display: block;
+        }
+
+        /* Sidebar */
+        .model-sidebar {
+            width: 250px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #c62828;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .model-sidebar h3 {
+            color: #c62828;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .model-list {
+            list-style: none;
+        }
+
+        .model-list li {
+            margin-bottom: 12px;
+        }
+
+        .model-list a {
+            display: block;
+            padding: 12px 15px;
+            background: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .model-list a:hover,
+        .model-list a.active-model {
+            background: #c62828;
+            color: white;
+        }
+
+        /* Common Elements */
+        .product-image {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-info h1 {
+            color: #c62828;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .product-info p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c62828;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #a02020;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tech-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .tech-table thead {
+            background: #c62828;
+            color: white;
+        }
+
+        .tech-table th,
+        .tech-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tech-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .tech-table h2 {
+            color: #c62828;
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+        }
+
+        /* OPTION 1: 2x2 Grid Layout */
+        .layout-option-1 {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .layout-option-1 .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+        }
+
+        .layout-option-1 .product-image {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .layout-option-1 .product-info {
+            grid-column: 2;
+            grid-row: 1;
+            padding: 20px;
+        }
+
+        .layout-option-1 .chart-container {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .layout-option-1 .specs-table {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        /* OPTION 2: Tabbed Interface */
+        .layout-option-2 {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .layout-option-2 .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .layout-option-2 .product-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: #c62828;
+            background: #f9f9f9;
+        }
+
+        .tab-btn.active {
+            color: #c62828;
+            border-bottom-color: #c62828;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* OPTION 3: Single Column Stack */
+        .layout-option-3 {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .layout-option-3 .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 1200px;
+        }
+
+        .layout-option-3 .product-overview {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+        }
+
+        /* OPTION 4: Optimized Current Layout */
+        .layout-option-4 {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+        }
+
+        .layout-option-4 .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .layout-option-4 .product-overview {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .layout-option-4 .product-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .layout-option-4 .model-sidebar {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+        }
+
+        .back-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-top: 30px;
+            border-radius: 6px;
+        }
+
+        .back-note strong {
+            color: #856404;
+        }
+
+        @media (max-width: 1200px) {
+            .layout-option-1 .main-content,
+            .layout-option-2 .product-overview,
+            .layout-option-3 .product-overview,
+            .layout-option-4 .product-overview,
+            .layout-option-4 .product-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-option-1,
+            .layout-option-2,
+            .layout-option-3,
+            .layout-option-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .model-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-header">
+        <h1><i class="fas fa-palette"></i> Product Page Layout Options Demo</h1>
+        <p>Compare different layout designs for the HS-100P Mixed Flow Fan product page. Click each option to see how it looks!</p>
+    </div>
+
+    <div class="layout-switcher">
+        <h2>Choose a Layout Option:</h2>
+        <div class="switcher-buttons">
+            <button class="layout-btn active" onclick="switchLayout(1)">
+                <i class="fas fa-th"></i> Option 1: 2x2 Grid
+            </button>
+            <button class="layout-btn" onclick="switchLayout(2)">
+                <i class="fas fa-folder-open"></i> Option 2: Tabbed Interface
+            </button>
+            <button class="layout-btn" onclick="switchLayout(3)">
+                <i class="fas fa-bars"></i> Option 3: Single Column
+            </button>
+            <button class="layout-btn" onclick="switchLayout(4)">
+                <i class="fas fa-columns"></i> Option 4: Optimized Current
+            </button>
+        </div>
+    </div>
+
+    <!-- OPTION 1: 2x2 Grid Layout -->
+    <div id="layout-1" class="layout-container active">
+        <div class="layout-option-1">
+            <aside class="model-sidebar">
+                <h3>Models</h3>
+                <ul class="model-list">
+                    <li><a href="#" class="active-model">HS-100P</a></li>
+                    <li><a href="#">HS-125P</a></li>
+                    <li><a href="#">HS-150P</a></li>
+                    <li><a href="#">HS-200P</a></li>
+                    <li><a href="#">HS-250P</a></li>
+                    <li><a href="#">HS-315P</a></li>
+                </ul>
+            </aside>
+
+            <div class="main-content">
+                <div class="product-image">
+                    <img src="../../Images/HS_100P_125P.jpg" alt="HS-100P Mixed Flow Fan">
+                </div>
+
+                <div class="product-info">
+                    <h1>HS-100P Mixed Flow Inline Fan</h1>
+                    <p>
+                        The HS-100P Mixed Flow Inline Fan combines compact size with efficient performance, making it ideal for small to medium ventilation applications. Perfect for bathrooms, kitchens, offices, and small HVAC duct installations.
+                    </p>
+                    <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Datasheet</a>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="fanChart1"></canvas>
+                </div>
+
+                <div class="specs-table">
+                    <h2>Technical Specifications</h2>
+                    <div class="tech-table-wrapper">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Speed</th>
+                                    <th>Airflow (m³/h)</th>
+                                    <th>Voltage</th>
+                                    <th>RPM</th>
+                                    <th>Power (W)</th>
+                                    <th>Noise (dB)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>High</td>
+                                    <td>198</td>
+                                    <td>220–240V</td>
+                                    <td>2200</td>
+                                    <td>26</td>
+                                    <td>31</td>
+                                </tr>
+                                <tr>
+                                    <td>Low</td>
+                                    <td>165</td>
+                                    <td>220–240V</td>
+                                    <td>1850</td>
+                                    <td>23</td>
+                                    <td>26</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 2: Tabbed Interface -->
+    <div id="layout-2" class="layout-container">
+        <div class="layout-option-2">
+            <aside class="model-sidebar">
+                <h3>Models</h3>
+                <ul class="model-list">
+                    <li><a href="#" class="active-model">HS-100P</a></li>
+                    <li><a href="#">HS-125P</a></li>
+                    <li><a href="#">HS-150P</a></li>
+                    <li><a href="#">HS-200P</a></li>
+                    <li><a href="#">HS-250P</a></li>
+                    <li><a href="#">HS-315P</a></li>
+                </ul>
+            </aside>
+
+            <div class="main-content">
+                <div class="product-overview">
+                    <div class="product-image">
+                        <img src="../../Images/HS_100P_125P.jpg" alt="HS-100P Mixed Flow Fan">
+                    </div>
+
+                    <div class="product-info">
+                        <h1>HS-100P Mixed Flow Inline Fan</h1>
+                        <p>
+                            The HS-100P Mixed Flow Inline Fan combines compact size with efficient performance, making it ideal for small to medium ventilation applications. Perfect for bathrooms, kitchens, offices, and small HVAC duct installations.
+                        </p>
+                        <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Datasheet</a>
+                    </div>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="switchTab('chart')">
+                            <i class="fas fa-chart-line"></i> Performance Chart
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('specs')">
+                            <i class="fas fa-table"></i> Technical Specifications
+                        </button>
+                    </div>
+
+                    <div id="tab-chart" class="tab-content active">
+                        <div class="chart-container">
+                            <canvas id="fanChart2"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="tab-specs" class="tab-content">
+                        <h2>Technical Specifications</h2>
+                        <div class="tech-table-wrapper">
+                            <table class="tech-table">
+                                <thead>
+                                    <tr>
+                                        <th>Speed</th>
+                                        <th>Airflow (m³/h)</th>
+                                        <th>Voltage</th>
+                                        <th>RPM</th>
+                                        <th>Power (W)</th>
+                                        <th>Noise (dB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>High</td>
+                                        <td>198</td>
+                                        <td>220–240V</td>
+                                        <td>2200</td>
+                                        <td>26</td>
+                                        <td>31</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Low</td>
+                                        <td>165</td>
+                                        <td>220–240V</td>
+                                        <td>1850</td>
+                                        <td>23</td>
+                                        <td>26</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 3: Single Column Stack -->
+    <div id="layout-3" class="layout-container">
+        <div class="layout-option-3">
+            <aside class="model-sidebar">
+                <h3>Models</h3>
+                <ul class="model-list">
+                    <li><a href="#" class="active-model">HS-100P</a></li>
+                    <li><a href="#">HS-125P</a></li>
+                    <li><a href="#">HS-150P</a></li>
+                    <li><a href="#">HS-200P</a></li>
+                    <li><a href="#">HS-250P</a></li>
+                    <li><a href="#">HS-315P</a></li>
+                </ul>
+            </aside>
+
+            <div class="main-content">
+                <div class="product-overview">
+                    <div class="product-image">
+                        <img src="../../Images/HS_100P_125P.jpg" alt="HS-100P Mixed Flow Fan">
+                    </div>
+
+                    <div class="product-info">
+                        <h1>HS-100P Mixed Flow Inline Fan</h1>
+                        <p>
+                            The HS-100P Mixed Flow Inline Fan combines compact size with efficient performance, making it ideal for small to medium ventilation applications. Perfect for bathrooms, kitchens, offices, and small HVAC duct installations. Durable construction ensures long-lasting performance and easy maintenance.
+                        </p>
+                        <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Datasheet</a>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="fanChart3"></canvas>
+                </div>
+
+                <div class="specs-table">
+                    <h2>Technical Specifications</h2>
+                    <div class="tech-table-wrapper">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Speed</th>
+                                    <th>Airflow (m³/h)</th>
+                                    <th>Voltage</th>
+                                    <th>RPM</th>
+                                    <th>Power (W)</th>
+                                    <th>Noise (dB)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>High</td>
+                                    <td>198</td>
+                                    <td>220–240V</td>
+                                    <td>2200</td>
+                                    <td>26</td>
+                                    <td>31</td>
+                                </tr>
+                                <tr>
+                                    <td>Low</td>
+                                    <td>165</td>
+                                    <td>220–240V</td>
+                                    <td>1850</td>
+                                    <td>23</td>
+                                    <td>26</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 4: Optimized Current Layout -->
+    <div id="layout-4" class="layout-container">
+        <div class="layout-option-4">
+            <aside class="model-sidebar">
+                <h3>Models</h3>
+                <ul class="model-list">
+                    <li><a href="#" class="active-model">HS-100P</a></li>
+                    <li><a href="#">HS-125P</a></li>
+                    <li><a href="#">HS-150P</a></li>
+                    <li><a href="#">HS-200P</a></li>
+                    <li><a href="#">HS-250P</a></li>
+                    <li><a href="#">HS-315P</a></li>
+                </ul>
+            </aside>
+
+            <div class="main-content">
+                <div class="product-overview">
+                    <div class="product-image">
+                        <img src="../../Images/HS_100P_125P.jpg" alt="HS-100P Mixed Flow Fan">
+                    </div>
+
+                    <div class="product-info">
+                        <h1>HS-100P Mixed Flow Inline Fan</h1>
+                        <p>
+                            The HS-100P Mixed Flow Inline Fan combines compact size with efficient performance, making it ideal for small to medium ventilation applications. Perfect for bathrooms, kitchens, offices, and small HVAC duct installations.
+                        </p>
+                        <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Datasheet</a>
+                    </div>
+                </div>
+
+                <div class="product-specs">
+                    <div class="chart-container">
+                        <canvas id="fanChart4"></canvas>
+                    </div>
+
+                    <div class="specs-table">
+                        <h2>Technical Specifications</h2>
+                        <div class="tech-table-wrapper">
+                            <table class="tech-table">
+                                <thead>
+                                    <tr>
+                                        <th>Speed</th>
+                                        <th>Airflow (m³/h)</th>
+                                        <th>Voltage</th>
+                                        <th>RPM</th>
+                                        <th>Power (W)</th>
+                                        <th>Noise (dB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>High</td>
+                                        <td>198</td>
+                                        <td>220–240V</td>
+                                        <td>2200</td>
+                                        <td>26</td>
+                                        <td>31</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Low</td>
+                                        <td>165</td>
+                                        <td>220–240V</td>
+                                        <td>1850</td>
+                                        <td>23</td>
+                                        <td>26</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-note">
+        <strong><i class="fas fa-info-circle"></i> Note:</strong> This is a demo page to help you visualize different layout options. Once you choose your preferred layout, I'll implement it across all your product pages. The charts shown here are sample visualizations.
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Layout Switcher
+        function switchLayout(optionNumber) {
+            // Hide all layouts
+            document.querySelectorAll('.layout-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.layout-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected layout
+            document.getElementById('layout-' + optionNumber).classList.add('active');
+            document.querySelectorAll('.layout-btn')[optionNumber - 1].classList.add('active');
+
+            // Scroll to top of layout
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Tab Switcher for Option 2
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            if (tabName === 'chart') {
+                document.getElementById('tab-chart').classList.add('active');
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            } else {
+                document.getElementById('tab-specs').classList.add('active');
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            }
+        }
+
+        // Create Performance Charts
+        function createChart(canvasId) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx) return;
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [0, 50, 100, 150, 200, 250],
+                    datasets: [{
+                        label: 'High Speed',
+                        data: [180, 165, 150, 120, 80, 20],
+                        borderColor: '#c62828',
+                        backgroundColor: 'rgba(198, 40, 40, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    },
+                    {
+                        label: 'Low Speed',
+                        data: [140, 130, 115, 95, 60, 15],
+                        borderColor: '#1976d2',
+                        backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'HS-100P Performance Curve',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Airflow (m³/h)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Static Pressure (Pa)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize all charts
+        window.addEventListener('load', () => {
+            createChart('fanChart1');
+            createChart('fanChart2');
+            createChart('fanChart3');
+            createChart('fanChart4');
+        });
+    </script>
+</body>
+
+</html>

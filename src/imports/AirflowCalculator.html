@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en-title="Prodigy Airflow Calculator & Fan Selector"
+    data-ar-title="حاسبة تدفق الهواء ومحدد المروحة - بروديجي">Prodigy Airflow Calculator & Fan Selector</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <link rel="stylesheet" href="../style.css"> <!-- your main CSS -->
+  <style>
+    .content-section {
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+
+<body class="airflow-page">
+  <header class="navbar fixed-top">
+    <div class="container">
+      <div class="logo-container">
+        <img src="../Images/logo.png" alt="Prodigy Company Logo" class="logo-img">
+        <p class="navbar-logo-text">
+          <span class="navbar-logo-brand">PRODIGY</span>
+          <span class="navbar-logo-rest" style="margin-right: 20px;">Ventilation Systems </span>
+        </p>
+
+      </div>
+      <nav class="nav-links">
+        <li><a href="../index.html" data-en="Home" data-ar="الرئيسية">Home</a></li>
+
+        <li class="nav-dropdown-item">
+          <a data-en="Technical Support" data-ar="الدعم الفني">Technical Support</a>
+          <ul class="dropdown-menu">
+            <li><a href="FanSelector.html" data-en="Fan Selector Tool" data-ar="أداة تحديد المروحة">Fan
+                Selector Tool</a></li>
+            <li><a href="ESPCalculator.html" data-en="ESP Calculator" data-ar="ESP حاسبة">ESP
+                Calculator</a>
+            </li>
+            <li><a class="active-item" data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow
+                Calculator</a>
+            </li>
+            <li><a href="../Documentation/Catalog.pdf" download class="download-btn" data-en="Download Catalogue"
+                data-ar="تحميل الدليل">Download Catalogue</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-dropdown-item">
+          <a data-en="Products" data-ar="المنتجات">Products</a>
+          <ul class="product-dropdown">
+            <li>
+              <span class="ulHeader" data-en="Commercial" data-ar="تجاري">Commercial</span>
+              <ul>
+                <li>
+                  <a class="innerItem" href="../Products/InlineDuctFan.html" data-en="In-Line Duct Fan"
+                    data-ar="مروحة دكت داخلية">
+                    In-Line Duct Fan
+                  </a>
+                </li>
+                <li>
+                  <a class="innerItem" href="products/commercial/cabinet-fan.html" data-en="Cabinet Fan"
+                    data-ar="مروحة خزانة">
+                    Cabinet Fan
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="ulHeader" data-en="Residential" data-ar="سكني">Residential</span>
+              <ul>
+                <li> <a class="innerItem" href="products/commercial/in-line-duct-fan.html" data-en="In-Line Duct Fan"
+                    data-ar="مروحة دكت داخلية">
+                    In-Line Duct Fan
+                  </a></li>
+                <li>
+                  <a class="innerItem" href="products/commercial/window-fan.html" data-en="Window Fan"
+                    data-ar="مروحة نافذة">
+                    Window Fan
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="../about.html" data-en="About Us" data-ar="من نحن">About Us</a></li>
+      </nav>
+      <div class="nav-controls">
+        <button id="language-toggle" class="lang-btn" data-lang="ar">العربية</button>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <header class="page-header">
+    <h1 data-en="PRODIGY Airflow Calculator & Fan Selector" data-ar="حاسبة تدفق الهواء ومحدد المروحة - بروديجي">
+      PRODIGY
+      Airflow Calculator & Fan Selector</h1>
+  </header>
+  <main class="content-section" id="home">
+    <div class="container">
+      <div class="middle-table">
+        <div class="calculator">
+          <h2 style="text-align:center;" data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow
+            Calculator</h2>
+          <div class="labelsAlign">
+            <label data-en="Length (m)" data-ar="الطول (م)">Length (m)</label>
+            <input type="number" id="length" step="0.01" min="0">
+            <label data-en="Width (m)" data-ar="العرض (م)">Width (m)</label>
+            <input type="number" id="width" step="0.01" min="0">
+            <label data-en="Height (m)" data-ar="الارتفاع (م)">Height (m)</label>
+            <input type="number" id="height" step="0.01" min="0">
+            <label data-en="Room Type" data-ar="نوع الغرفة">Room Type</label>
+          </div>
+          <select id="room">
+            <option value="Basements" data-en="Basements (3–4 ACH)" data-ar="الأقبية (3–4 ACH)">Basements (3–4 ACH)
+            </option>
+            <option value="Bathrooms" data-en="Bathrooms (6–7 ACH)" data-ar="الحمامات (6–7 ACH)">Bathrooms (6–7 ACH)
+            </option>
+            <option value="Bedrooms" data-en="Bedrooms (5–6 ACH)" data-ar="غرف النوم (5–6 ACH)">Bedrooms (5–6 ACH)
+            </option>
+            <option value="Kitchens" data-en="Kitchens (Residential) (7–8 ACH)" data-ar="المطابخ (سكني) (7–8 ACH)">
+              Kitchens
+              (Residential) (7–8 ACH)</option>
+            <option value="Laundry" data-en="Laundry Rooms (8–9 ACH)" data-ar="غرف الغسيل (8–9 ACH)">Laundry Rooms (8–9
+              ACH)
+            </option>
+            <option value="Living" data-en="Living Rooms (6–8 ACH)" data-ar="غرف المعيشة (6–8 ACH)">Living Rooms (6–8
+              ACH)
+            </option>
+            <option value="Offices" data-en="Offices (6–8 ACH)" data-ar="المكاتب (6–8 ACH)">Offices (6–8 ACH)</option>
+            <option value="Conference" data-en="Conference Rooms (8–12 ACH)" data-ar="غرف الاجتماعات (8–12 ACH)">
+              Conference
+              Rooms (8–12 ACH)</option>
+            <option value="Server" data-en="Computer / Server Rooms (10–14 ACH)"
+              data-ar="غرف الكمبيوتر / السيرفر (10–14 ACH)">Computer / Server Rooms (10–14 ACH)</option>
+            <option value="Break" data-en="Break Rooms (7–8 ACH)" data-ar="غرف الاستراحة (7–8 ACH)">Break Rooms (7–8
+              ACH)
+            </option>
+            <option value="Retail" data-en="Retail Stores (6–10 ACH)" data-ar="المحلات التجارية (6–10 ACH)">Retail
+              Stores
+              (6–10 ACH)</option>
+            <option value="Restaurant" data-en="Restaurant Dining Areas (8–10 ACH)"
+              data-ar="مطاعم / مناطق الطعام (8–10 ACH)">Restaurant Dining Areas (8–10 ACH)</option>
+            <option value="CommercialKitchen" data-en="Commercial Kitchens (14–18 ACH)"
+              data-ar="المطابخ التجارية (14–18 ACH)">Commercial Kitchens (14–18 ACH)</option>
+            <option value="PublicRestrooms" data-en="Public Restrooms (10–12 ACH)"
+              data-ar="دورات المياه العامة (10–12 ACH)">Public Restrooms (10–12 ACH)</option>
+            <option value="Auditorium" data-en="Auditoriums (12–14 ACH)" data-ar="المدرجات / القاعات (12–14 ACH)">
+              Auditoriums (12–14 ACH)</option>
+          </select>
+
+          <label style="text-align: left;" data-en="Fan Material" data-ar="مادة المروحة">Fan Material</label>
+          <select id="material" onchange="updateChart()">
+            <option value="ms" data-en="Metal (MS)" data-ar="معدن (MS)">Metal (MS)</option>
+            <option value="hs" data-en="Plastic (HS)" data-ar="بلاستيك (HS)">Plastic (HS)</option>
+          </select>
+          <button class="afbutton" onclick="calculateAirflow()" data-en="Calculate & Show Fan Selector"
+            data-ar="احسب وأظهر محدد المروحة">Calculate & Show Fan Selector</button>
+          <div class="result" id="result"></div>
+        </div>
+
+        <div class="selector" id="selector" style="display:none;">
+          <h2 style="text-align:center;" data-en="Fan Selector" data-ar="محدد المروحة">Fan Selector</h2>
+
+          <div class="airflow-row">
+            <div class="airflow-box">
+              <label data-en="Required Airflow (CFM)" data-ar="تدفق الهواء المطلوب (CFM)">Required Airflow (CFM)</label>
+              <input type="number" id="cfmInput" readonly>
+            </div>
+            <div class="airflow-box">
+              <label>
+                <input type="checkbox" id="customCheck" style="width:15px;vertical-align:middle;">
+                <span data-en="Custom Airflow (CFM)" data-ar="تدفق الهواء المخصص (CFM)">Custom Airflow (CFM)</span>
+              </label>
+              <input type="number" id="customCFM" disabled>
+              <div class="custom-note" data-en="Check to enter Custom Airflow; uncheck to revert."
+                data-ar="اختر لإدخال تدفق هواء مخصص؛ قم بإلغاء التحديد للعودة.">Check to enter Custom Airflow; uncheck
+                to
+                revert.</div>
+            </div>
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="fanChart"></canvas>
+          </div>
+
+          <div class="selected-fan" id="selectedFan"></div>
+        </div>
+      </div>
+  </main>
+  </div>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="contact-info">
+        <h4 data-en="Contact Info" data-ar="معلومات الاتصال">Contact Info</h4>
+        <p><i class="fas fa-envelope"></i>
+          <a href="mailto:info@prodigysystems.ae"> info@prodigysystems.ae</a>
+        </p>
+        <p><i class="fas fa-phone"></i> +971503134010</p>
+      </div>
+      <div class="social-media">
+        <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="container copyright">
+      &copy; <span id="current-year"></span> Prodigy. <span data-en="All Rights Reserved."
+        data-ar="جميع الحقوق محفوظة.">All Rights Reserved.</span>
+    </div>
+  </footer>
+  <script src="../script.js"></script>
+  <script>
+    // بيانات الغرف
+    const roomACH = {
+      "Basements": [3, 4], "Bathrooms": [6, 7], "Bedrooms": [5, 6], "Kitchens": [7, 8], "Laundry": [8, 9],
+      "Living": [6, 8], "Offices": [6, 8], "Conference": [8, 12], "Server": [10, 14], "Break": [7, 8],
+      "Retail": [6, 10], "Restaurant": [8, 10], "CommercialKitchen": [14, 18], "PublicRestrooms": [10, 12],
+      "Auditorium": [12, 14]
+    };
+
+    // بيانات المراوح
+    const fansData = {
+      hs: [
+        { name: "HS-100P", data: [[0, 156], [50, 135], [100, 98], [125, 90], [150, 69], [175, 40], [198, 0]] },
+        { name: "HS-150P", data: [[0, 300], [90, 200], [180, 180], [270, 165], [360, 135], [450, 55], [530, 0]] },
+        { name: "HS-200P", data: [[0, 352], [100, 280], [200, 245], [300, 210], [400, 195], [500, 175], [600, 140], [700, 100], [840, 0]] },
+        { name: "HS-250P", data: [[0, 488], [200, 420], [400, 355], [600, 300], [800, 255], [1200, 160], [1405, 0]] },
+        { name: "HS-315P", data: [[0, 693], [220, 600], [440, 500], [660, 400], [880, 315], [1100, 275], [1320, 220], [1540, 180], [1760, 120], [1980, 50], [2206, 0]] }
+      ],
+      ms: [
+        { name: "MS-100M", data: [[0, 315], [62, 295], [124, 270], [155, 250], [186, 224], [217, 180], [248, 125], [310, 0]] },
+        { name: "MS-150M", data: [[0, 443], [112, 415], [224, 385], [336, 357], [448, 320], [560, 240], [672, 62], [720, 0]] },
+        { name: "MS-200M", data: [[0, 580], [250, 555], [500, 500], [625, 455], [750, 400], [875, 315], [1000, 155], [1120, 0]] },
+        { name: "MS-250M", data: [[0, 670], [250, 650], [500, 610], [750, 540], [1000, 440], [1125, 350], [1250, 225], [1320, 0]] },
+        { name: "MS-315M", data: [[0, 700], [250, 685], [500, 655], [750, 635], [1000, 580], [1250, 520], [1500, 430], [1750, 275], [1900, 0]] }
+      ]
+    };
+
+    // نطاقات المراوح
+    const fansRanges = {
+      ms: [
+        { name: "MS-100M", minCFM: 0, maxCFM: 160, minPa: 50 },
+        { name: "MS-150M", minCFM: 161, maxCFM: 359, minPa: 160 },
+        { name: "MS-200M", minCFM: 360, maxCFM: 500, minPa: 300 },
+        { name: "MS-250M", minCFM: 501, maxCFM: 691, minPa: 300 },
+        { name: "MS-315M", minCFM: 692, maxCFM: 1100, minPa: 300 }
+      ],
+      hs: [
+        { name: "HS-100P", minCFM: 1, maxCFM: 100, minPa: 30 },
+        { name: "HS-150P", minCFM: 101, maxCFM: 221, minPa: 120 },
+        { name: "HS-200P", minCFM: 222, maxCFM: 336, minPa: 150 },
+        { name: "HS-250P", minCFM: 337, maxCFM: 607, minPa: 200 },
+        { name: "HS-315P", minCFM: 608, maxCFM: 1297, minPa: 200 }
+      ]
+    };
+
+    let chart;
+
+    // دوال الحسابات كما سبق
+    function interpolate(xArr, yArr, x) { for (let i = 0; i < xArr.length - 1; i++) { if (x >= xArr[i] && x <= xArr[i + 1]) { const slope = (yArr[i + 1] - yArr[i]) / (xArr[i + 1] - xArr[i]); return yArr[i] + slope * (x - xArr[i]); } } return 0; }
+    function selectFan(material, airflow_cfm) { const airflow_m3h = airflow_cfm * 1.699; const ranges = fansRanges[material]; const fans = fansData[material]; for (let fanRange of ranges) { if (airflow_cfm >= fanRange.minCFM && airflow_cfm <= fanRange.maxCFM) { const fanObj = fans.find(f => f.name === fanRange.name); const P = interpolate(fanObj.data.map(p => p[0]), fanObj.data.map(p => p[1]), airflow_m3h); if (P >= fanRange.minPa) { return { name: fanRange.name, pressure: P, airflow_m3h }; } } } return { name: 'No suitable fan', pressure: 0, airflow_m3h }; }
+
+    function calculateAirflow() {
+      const l = parseFloat(document.getElementById('length').value);
+      const w = parseFloat(document.getElementById('width').value);
+      const h = parseFloat(document.getElementById('height').value);
+      const room = document.getElementById('room').value;
+      const material = document.getElementById('material').value;
+      if (isNaN(l) || isNaN(w) || isNaN(h)) { alert('Please enter valid dimensions.return;'); return; }
+      const volume = l * w * h;
+      const ach = (roomACH[room][0] + roomACH[room][1]) / 2;
+      const airflow_m3h = volume * ach;
+      const airflow_cfm = airflow_m3h / 1.699;
+      document.getElementById('result').innerHTML =
+        `Room Volume: ${volume.toFixed(2)} m³<br>` +
+        `Recommended ACH: ${ach.toFixed(1)}<br>` +
+        `Required Airflow: ${airflow_m3h.toFixed(2)} m³/h`;
+      document.getElementById('cfmInput').value = airflow_cfm.toFixed(1);
+      document.getElementById('selector').style.display = 'block';
+      renderChart(material, airflow_m3h);
+    }
+
+    function renderChart(material, airflow_m3h) {
+      const ctx = document.getElementById('fanChart').getContext('2d');
+      if (chart) chart.destroy();
+      const fans = fansData[material];
+      const datasets = fans.map((fan, i) => ({ label: fan.name, data: fan.data.map(p => ({ x: p[0], y: p[1] })), borderColor: `hsl(${i * 60},80%,50%)`, fill: false, tension: 0.1, pointRadius: 0 }));
+
+      const airflow_cfm = document.getElementById('customCheck').checked ? parseFloat(document.getElementById('customCFM').value) || airflow_m3h / 1.699 : airflow_m3h / 1.699;
+      const selected = selectFan(material, airflow_cfm);
+
+      let selectedFanPoint = null;
+      if (selected.name !== 'No suitable fan') { selectedFanPoint = { x: selected.airflow_m3h, y: selected.pressure }; }
+      if (selectedFanPoint) { datasets.push({ label: "Selected Airflow", data: [selectedFanPoint], borderColor: "#000", pointBackgroundColor: "blue", pointRadius: 8, showLine: false }); }
+
+      const allY = fans.flatMap(f => f.data.map(p => p[1]));
+
+
+      chart = new Chart(ctx, { type: 'line', data: { datasets: datasets }, options: { responsive: true, parsing: { xAxisKey: 'x', yAxisKey: 'y' }, scales: { x: { type: 'linear', title: { display: true, text: 'Airflow (m³/h)' }, min: 0 }, y: { title: { display: true, text: 'Pressure (Pa)' }, min: 0, max: 700 } } } });
+
+      const fanInfo = document.getElementById('selectedFan');
+      if (selectedFanPoint) { fanInfo.innerHTML = `Selected Fan: ${selected.name} &nbsp; | &nbsp; Pressure: ${selectedFanPoint.y.toFixed(1)} Pa &nbsp; | &nbsp; Airflow: ${(selectedFanPoint.x / 1.699).toFixed(1)} CFM`; }
+      else { fanInfo.innerHTML = 'No suitable fan found for this airflow'; }
+    }
+
+    function updateChart() { calculateAirflow(); }
+    document.getElementById('customCheck').addEventListener('change', function () { document.getElementById('customCFM').disabled = !this.checked; updateChart(); });
+    document.getElementById('customCFM').addEventListener('input', updateChart);
+  </script>
+
+</body>
+
+</html>
