@@ -137,7 +137,7 @@ function buildChart(mode) {
                 }
             },
             plugins: {
-                legend: { 
+                legend: {
                     position: 'bottom',
                     labels: {
                         padding: 15,
@@ -230,13 +230,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("modeSelect").addEventListener("change", function () {
         const mode = this.value;
-        
+
         // Update fan image
         const fanImage = document.getElementById("fanImage");
         if (fanImage) {
-            fanImage.src = mode === "HS" 
-                ? "../HSFan.png" 
-                : "../MSFan.png";
+            fanImage.src = mode === "HS"
+                ? "../src/assets/HSFan.png"
+                : "../src/assets/MSFan.png";
         }
 
         buildChart(mode);

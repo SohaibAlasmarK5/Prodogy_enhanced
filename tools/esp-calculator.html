@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP Calculator - Prodigy Ventilation Systems</title>
-    
+
     <!-- Prevent Dark Mode Flash -->
     <script>
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
         })();
     </script>
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="alternate icon" href="../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../favicon.ico">
+    <link rel="alternate icon" href="../favicon.ico">
     <link rel="apple-touch-icon" href="../logo.png">
-    
+
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/tools.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -31,21 +33,25 @@
                     <img src="../logo.png" alt="Prodigy Logo" class="logo-img">
                     <div class="logo-text">
                         <span class="logo-brand">PRODIGY</span>
-                        <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation Systems</span>
+                        <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation
+                            Systems</span>
                     </div>
                 </div>
                 <nav class="nav" id="mainNav">
                     <a href="../index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a>
-                    
+
                     <div class="nav-dropdown">
                         <button class="nav-link dropdown-toggle">
                             <span data-en="Technical Support" data-ar="الدعم الفني">Technical Support</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a href="fan-selector.html" class="dropdown-item" data-en="Fan Selector Tool" data-ar="أداة تحديد المروحة">Fan Selector Tool</a>
-                            <a href="airflow-calculator.html" class="dropdown-item" data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow Calculator</a>
-                            <a href="esp-calculator.html" class="dropdown-item active" data-en="ESP Calculator" data-ar="ESP حاسبة">ESP Calculator</a>
+                            <a href="fan-selector.html" class="dropdown-item" data-en="Fan Selector Tool"
+                                data-ar="أداة تحديد المروحة">Fan Selector Tool</a>
+                            <a href="airflow-calculator.html" class="dropdown-item" data-en="Airflow Calculator"
+                                data-ar="حاسبة تدفق الهواء">Airflow Calculator</a>
+                            <a href="esp-calculator.html" class="dropdown-item active" data-en="ESP Calculator"
+                                data-ar="ESP حاسبة">ESP Calculator</a>
                         </div>
                     </div>
 
@@ -58,22 +64,29 @@
                             <div class="products-grid">
                                 <div>
                                     <div class="product-header" data-en="Commercial" data-ar="تجاري">Commercial</div>
-                                    <a href="../products/commercial/inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
-                                    <a href="../products/commercial/cabinet-fan.html" class="dropdown-item" data-en="Cabinet Fan" data-ar="مروحة خزانة">Cabinet Fan</a>
-                                    <a href="../products/accessories.html" class="dropdown-item" data-en="Accessories" data-ar="الملحقات">Accessories</a>
+                                    <a href="../products/commercial/inline-duct-fan.html" class="dropdown-item"
+                                        data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="../products/commercial/cabinet-fan.html" class="dropdown-item"
+                                        data-en="Cabinet Fan" data-ar="مروحة خزانة">Cabinet Fan</a>
+                                    <a href="../products/accessories.html" class="dropdown-item" data-en="Accessories"
+                                        data-ar="الملحقات">Accessories</a>
                                 </div>
                                 <div>
                                     <div class="product-header" data-en="Residential" data-ar="سكني">Residential</div>
-                                    <a href="../products/commercial/inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
-                                    <a href="../products/commercial/window-fan.html" class="dropdown-item" data-en="Window Fan" data-ar="مروحة نافذة">Window Fan</a>
-                                    <a href="../products/accessories.html" class="dropdown-item" data-en="Accessories" data-ar="الملحقات">Accessories</a>
+                                    <a href="../products/commercial/inline-duct-fan.html" class="dropdown-item"
+                                        data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="../products/commercial/window-fan.html" class="dropdown-item"
+                                        data-en="Window Fan" data-ar="مروحة نافذة">Window Fan</a>
+                                    <a href="../products/accessories.html" class="dropdown-item" data-en="Accessories"
+                                        data-ar="الملحقات">Accessories</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <a href="../index.html#about" class="nav-link" data-en="About Us" data-ar="من نحن">About Us</a>
-                    <a href="../index.html#catalogue" class="nav-link" data-en="Catalogue" data-ar="الدليل">Catalogue</a>
+                    <a href="../index.html#catalogue" class="nav-link" data-en="Catalogue"
+                        data-ar="الدليل">Catalogue</a>
                 </nav>
                 <div class="header-controls">
                     <button id="themeToggle" class="control-btn" aria-label="Toggle theme">
@@ -95,23 +108,31 @@
         <div class="container">
             <div class="tool-header">
                 <h1 data-en="PRODIGY ESP Calculator" data-ar="حاسبة ESP بروديجي">PRODIGY ESP Calculator</h1>
-                <p data-en="Calculate External Static Pressure for your duct system" data-ar="احسب الضغط الساكن الخارجي لنظام القنوات الخاص بك">Calculate External Static Pressure for your duct system</p>
+                <p data-en="Calculate External Static Pressure for your duct system"
+                    data-ar="احسب الضغط الساكن الخارجي لنظام القنوات الخاص بك">Calculate External Static Pressure for
+                    your duct system</p>
             </div>
 
             <!-- Data from Airflow Calculator -->
-            <div id="airflowData" style="display: none; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <h3 style="margin: 0 0 1rem 0; font-size: 1.25rem; font-weight: 600;" data-en="Data from Airflow Calculator" data-ar="بيانات من حاسبة تدفق الهواء">Data from Airflow Calculator</h3>
+            <div id="airflowData"
+                style="display: none; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin: 0 0 1rem 0; font-size: 1.25rem; font-weight: 600;"
+                    data-en="Data from Airflow Calculator" data-ar="بيانات من حاسبة تدفق الهواء">Data from Airflow
+                    Calculator</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Safety Factor" data-ar="عامل الأمان">Safety Factor</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Safety Factor"
+                            data-ar="عامل الأمان">Safety Factor</div>
                         <div id="displaySF" style="font-size: 1.5rem; font-weight: 700;">-</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Airflow" data-ar="تدفق الهواء">Airflow</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Airflow"
+                            data-ar="تدفق الهواء">Airflow</div>
                         <div id="displayAF" style="font-size: 1.5rem; font-weight: 700;">-</div>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Pressure" data-ar="الضغط">Pressure</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;" data-en="Pressure"
+                            data-ar="الضغط">Pressure</div>
                         <div id="displayP" style="font-size: 1.5rem; font-weight: 700;">-</div>
                     </div>
                 </div>
@@ -121,12 +142,14 @@
                 <!-- Basic Parameters -->
                 <div class="calculator-card">
                     <h2 data-en="Duct Parameters" data-ar="معايير القناة">Duct Parameters</h2>
-                    
+
                     <div class="form-row">
                         <label data-en="Duct Type" data-ar="نوع القناة">Duct Type</label>
                         <select id="ductType" class="form-input">
-                            <option value="PI" data-en="Pre-Insulated Duct (PI)" data-ar="قناة معزولة مسبقاً (PI)">Pre-Insulated Duct (PI)</option>
-                            <option value="GI" data-en="Galvanized Iron Duct (GI)" data-ar="قناة حديد مجلفن (GI)">Galvanized Iron Duct (GI)</option>
+                            <option value="PI" data-en="Pre-Insulated Duct (PI)" data-ar="قناة معزولة مسبقاً (PI)">
+                                Pre-Insulated Duct (PI)</option>
+                            <option value="GI" data-en="Galvanized Iron Duct (GI)" data-ar="قناة حديد مجلفن (GI)">
+                                Galvanized Iron Duct (GI)</option>
                             <option value="flex" data-en="Flexible Duct" data-ar="قناة مرنة">Flexible Duct</option>
                         </select>
                     </div>
@@ -134,7 +157,8 @@
                     <div class="form-row" id="rowFlexQual" style="display:none;">
                         <label data-en="Flexible Quality" data-ar="جودة التركيب">Flexible Quality</label>
                         <select id="flexQual" class="form-input">
-                            <option value="1.25" data-en="Pulled tight (good) — ×1.25" data-ar="مشدود جيداً — ×1.25">Pulled tight (good) — ×1.25</option>
+                            <option value="1.25" data-en="Pulled tight (good) — ×1.25" data-ar="مشدود جيداً — ×1.25">
+                                Pulled tight (good) — ×1.25</option>
                             <option value="2" data-en="Typical — ×2.0" data-ar="عادي — ×2.0">Typical — ×2.0</option>
                             <option value="3.5" data-en="Loose — ×3.5" data-ar="فضفاض — ×3.5">Loose — ×3.5</option>
                         </select>
@@ -156,8 +180,10 @@
                     <div class="form-row" id="rowRectSize" style="display:none;">
                         <label data-en="Size (mm)" data-ar="الأبعاد (مم)">Size (mm)</label>
                         <div class="inline-inputs">
-                            <input type="number" id="wMm" class="form-input" placeholder="Width" min="1" step="1" data-en-placeholder="Width" data-ar-placeholder="العرض">
-                            <input type="number" id="hMm" class="form-input" placeholder="Height" min="1" step="1" data-en-placeholder="Height" data-ar-placeholder="الارتفاع">
+                            <input type="number" id="wMm" class="form-input" placeholder="Width" min="1" step="1"
+                                data-en-placeholder="Width" data-ar-placeholder="العرض">
+                            <input type="number" id="hMm" class="form-input" placeholder="Height" min="1" step="1"
+                                data-en-placeholder="Height" data-ar-placeholder="الارتفاع">
                         </div>
                     </div>
 
@@ -169,7 +195,8 @@
                     <div class="form-row">
                         <label data-en="Airflow" data-ar="معدل الهواء">Airflow</label>
                         <div class="inline-inputs">
-                            <input type="number" id="flowVal" class="form-input" placeholder="e.g. 1200" min="0" step="0.01">
+                            <input type="number" id="flowVal" class="form-input" placeholder="e.g. 1200" min="0"
+                                step="0.01">
                             <select id="flowUnit" class="form-input">
                                 <option value="cfm">CFM</option>
                                 <option value="m3h">m³/h</option>
@@ -186,11 +213,13 @@
                         <label data-en="Derived Values" data-ar="القيم المشتقة">Derived Values</label>
                         <div class="inline-inputs">
                             <div style="flex: 1;">
-                                <label style="font-size: 0.85rem; font-weight: normal;" data-en="Area (m²)" data-ar="الماحة (م²)">Area (m²)</label>
+                                <label style="font-size: 0.85rem; font-weight: normal;" data-en="Area (m²)"
+                                    data-ar="الماحة (م²)">Area (m²)</label>
                                 <input type="text" id="areaM2" class="form-input" readonly>
                             </div>
                             <div style="flex: 1;">
-                                <label style="font-size: 0.85rem; font-weight: normal;" data-en="Velocity (m/s)" data-ar="السرعة (م/ث)">Velocity (m/s)</label>
+                                <label style="font-size: 0.85rem; font-weight: normal;" data-en="Velocity (m/s)"
+                                    data-ar="السرعة (م/ث)">Velocity (m/s)</label>
                                 <input type="text" id="velMs" class="form-input" readonly>
                             </div>
                         </div>
@@ -200,7 +229,8 @@
                 <!-- Add-ons -->
                 <div class="calculator-card">
                     <h2 data-en="Add-ons (Optional)" data-ar="الملحقات (اختياري)">Add-ons (Optional)</h2>
-                    <p class="note-text" data-en="Check the box to include the losses." data-ar="حدد المربع لتضمين الخسائر.">Check the box to include the losses.</p>
+                    <p class="note-text" data-en="Check the box to include the losses."
+                        data-ar="حدد المربع لتضمين الخسائر.">Check the box to include the losses.</p>
 
                     <div class="addon-row">
                         <label>
@@ -208,10 +238,12 @@
                             <span data-en="90° Elbows" data-ar="مرافق 90°">90° Elbows</span>
                         </label>
                         <select id="elbow90Type" class="form-input">
-                            <option value="without_vanes" data-en="Without Vanes" data-ar="بدون ريش">Without Vanes</option>
+                            <option value="without_vanes" data-en="Without Vanes" data-ar="بدون ريش">Without Vanes
+                            </option>
                             <option value="with_vanes" data-en="With Vanes" data-ar="مع ريش">With Vanes</option>
                         </select>
-                        <input type="number" id="elbow90Qty" class="form-input" placeholder="Qty" min="0" data-en-placeholder="Qty" data-ar-placeholder="الكمية">
+                        <input type="number" id="elbow90Qty" class="form-input" placeholder="Qty" min="0"
+                            data-en-placeholder="Qty" data-ar-placeholder="الكمية">
                         <div class="k-value" id="elbow90PaPer">0 Pa</div>
                     </div>
 
@@ -221,10 +253,12 @@
                             <span data-en="45° Elbows" data-ar="مرافق 45°">45° Elbows</span>
                         </label>
                         <select id="elbow45Type" class="form-input">
-                            <option value="without_vanes" data-en="Without Vanes" data-ar="دون ريش">Without Vanes</option>
+                            <option value="without_vanes" data-en="Without Vanes" data-ar="دون ريش">Without Vanes
+                            </option>
                             <option value="with_vanes" data-en="With Vanes" data-ar="مع ريش">With Vanes</option>
                         </select>
-                        <input type="number" id="elbow45Qty" class="form-input" placeholder="Qty" min="0" data-en-placeholder="Qty" data-ar-placeholder="الكمية">
+                        <input type="number" id="elbow45Qty" class="form-input" placeholder="Qty" min="0"
+                            data-en-placeholder="Qty" data-ar-placeholder="الكمية">
                         <div class="k-value" id="elbow45PaPer">0 Pa</div>
                     </div>
 
@@ -234,11 +268,13 @@
                             <span data-en="Filter" data-ar="الفلتر">Filter</span>
                         </label>
                         <select id="filterSelect" class="form-input">
-                            <option value="75" data-en="Standard — 75 Pa" data-ar="قياسي — 75 Pa">Standard — 75 Pa</option>
+                            <option value="75" data-en="Standard — 75 Pa" data-ar="قياسي — 75 Pa">Standard — 75 Pa
+                            </option>
                             <option value="300" data-en="HEPA — 300 Pa" data-ar="HEPA — 300 Pa">HEPA — 300 Pa</option>
                             <option value="0" data-en="None — 0 Pa" data-ar="بدون — 0 Pa">None — 0 Pa</option>
                         </select>
-                        <input type="number" id="filterCustom" class="form-input" placeholder="Custom Pa" data-en-placeholder="Custom Pa" data-ar-placeholder="Pa مخصص">
+                        <input type="number" id="filterCustom" class="form-input" placeholder="Custom Pa"
+                            data-en-placeholder="Custom Pa" data-ar-placeholder="Pa مخصص">
                     </div>
 
                     <div class="addon-row">
@@ -260,12 +296,15 @@
 
                 <!-- Results -->
                 <div class="calculator-card">
-                    <div class="formula-display" data-en="ESP total = Friction loss × length + ∑Elbow loss + Filter + Damper + Other" data-ar="ESP الكلي = خسارة الاحتكاك × الطول + خسائر المرفاع + الفلتر + المخمد + أخرى">
+                    <div class="formula-display"
+                        data-en="ESP total = Friction loss × length + ∑Elbow loss + Filter + Damper + Other"
+                        data-ar="ESP الكلي = خسارة الاحتكاك × الطول + خسائر المرفاع + الفلتر + المخمد + أخرى">
                         ESP total = Friction loss × length + ∑Elbow loss + Filter + Damper + Other
                     </div>
 
                     <div class="btn-group">
-                        <button class="btn-calculate" id="calcBtn" data-en="Calculate ESP" data-ar="احسب ESP">Calculate ESP</button>
+                        <button class="btn-calculate" id="calcBtn" data-en="Calculate ESP" data-ar="احسب ESP">Calculate
+                            ESP</button>
                         <button class="btn-reset" id="resetBtn" data-en="Reset" data-ar="إعادة تعيين">Reset</button>
                     </div>
 
@@ -301,15 +340,21 @@
                         <img src="../logo.png" alt="Prodigy Logo" class="footer-logo-img">
                         <div class="footer-logo-text">
                             <span class="logo-brand">PRODIGY</span>
-                            <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation Systems</span>
+                            <span class="logo-subtitle" data-en="Ventilation Systems"
+                                data-ar="أنظمة التهوية">Ventilation Systems</span>
                         </div>
                     </div>
-                    <p class="footer-description" data-en="Professional ventilation solutions for a healthier environment." data-ar="حول تهوية احترافية لبيئة أكثر صحة.">
+                    <p class="footer-description"
+                        data-en="Professional ventilation solutions for a healthier environment."
+                        data-ar="حول تهوية احترافية لبيئة أكثر صحة.">
                         Professional ventilation solutions for a healthier environment.
                     </p>
                     <div class="footer-social">
-                        <a href="https://ae.linkedin.com/company/prodigy-ventilation-systems-company-l-l-c?trk=public_post_feed-actor-name" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.youtube.com/@ProdigyVentilationSystem" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://ae.linkedin.com/company/prodigy-ventilation-systems-company-l-l-c?trk=public_post_feed-actor-name"
+                            target="_blank" rel="noopener noreferrer" class="social-link"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/@ProdigyVentilationSystem" target="_blank"
+                            rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
 
@@ -317,9 +362,12 @@
                     <h4 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="../index.html" data-en="Home" data-ar="الرئيسية">Home</a></li>
-                        <li><a href="fan-selector.html" data-en="Fan Selector" data-ar="اختيار المروحة">Fan Selector</a></li>
-                        <li><a href="esp-calculator.html" data-en="ESP Calculator" data-ar="حاسبة ESP">ESP Calculator</a></li>
-                        <li><a href="airflow-calculator.html" data-en="Airflow Calculator" data-ar="حاسبة التدفق">Airflow Calculator</a></li>
+                        <li><a href="fan-selector.html" data-en="Fan Selector" data-ar="اختيار المروحة">Fan Selector</a>
+                        </li>
+                        <li><a href="esp-calculator.html" data-en="ESP Calculator" data-ar="حاسبة ESP">ESP
+                                Calculator</a></li>
+                        <li><a href="airflow-calculator.html" data-en="Airflow Calculator"
+                                data-ar="حاسبة التدفق">Airflow Calculator</a></li>
                     </ul>
                 </div>
 
@@ -352,7 +400,10 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> <span data-en="Prodigy Ventilation Systems. All Rights Reserved." data-ar="أنظمة التهوية بروديجي. جميع الحقوق محفوظة.">Prodigy Ventilation Systems. All Rights Reserved.</span></p>
+                <p>&copy; <span id="currentYear"></span> <span
+                        data-en="Prodigy Ventilation Systems. All Rights Reserved."
+                        data-ar="أنظمة التهوية بروديجي. جميع الحقوق محفوظة.">Prodigy Ventilation Systems. All Rights
+                        Reserved.</span></p>
             </div>
         </div>
     </footer>
@@ -360,4 +411,5 @@
     <script src="../script.js"></script>
     <script src="esp-calculator.js"></script>
 </body>
+
 </html>
