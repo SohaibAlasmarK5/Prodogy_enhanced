@@ -1,0 +1,20 @@
+<svg width="55" height="55" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular Background -->
+  <circle cx="100" cy="100" r="100" fill="#dc2626"/>
+  
+  <!-- Inner Circle -->
+  <circle cx="100" cy="100" r="85" fill="#b91c1c"/>
+  
+  <!-- Letter P -->
+  <path d="M70 60 L70 140 M70 60 L100 60 Q120 60 120 80 Q120 100 100 100 L70 100" 
+        stroke="white" 
+        stroke-width="12" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+  
+  <!-- Decorative Elements (Wind Lines) -->
+  <path d="M130 75 L160 75" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M130 90 L155 90" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M130 105 L160 105" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+</svg>

@@ -367,4 +367,12 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
+// Video playback speed control for "Why Choose Us" section
+const featureVideo = document.querySelector('.features-image video');
+if (featureVideo) {
+    featureVideo.addEventListener('loadedmetadata', () => {
+        featureVideo.playbackRate = 0.5; // Slow down to 50% speed for a more professional look
+    });
+}
+
 console.log('Prodigy Ventilation Systems - Website Loaded Successfully');

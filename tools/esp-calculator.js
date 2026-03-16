@@ -12,12 +12,14 @@
         dataBox.style.display = 'block';
         
         if (sf !== null) {
-            document.getElementById('displaySF').textContent = parseFloat(sf).toFixed(0) + '%';
+            document.getElementById('displaySF').textContent = decodeURIComponent(sf);
         }
         
         if (af !== null) {
             const airflowValue = parseFloat(af);
-            document.getElementById('displayAF').textContent = airflowValue.toFixed(2) + ' m³/h';
+            // Convert m³/h to CFM for display
+            const airflowCFM = airflowValue / 1.699;
+            document.getElementById('displayAF').textContent = airflowCFM.toFixed(1) + ' CFM';
             
             // Pre-fill the airflow input
             setTimeout(() => {

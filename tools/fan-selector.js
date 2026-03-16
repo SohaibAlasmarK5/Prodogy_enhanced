@@ -137,7 +137,7 @@ function buildChart(mode) {
                 }
             },
             plugins: {
-                legend: {
+                legend: { 
                     position: 'bottom',
                     labels: {
                         padding: 15,
@@ -203,13 +203,90 @@ function updateResult() {
         const first = validFans[0];
         const second = validFans[1];
 
-        let resultHTML = `<strong>${TRANSLATIONS[lang].RESULT_FAN}</strong> <span style="color: #ffffff; font-weight: 700;">${first.fan.name}</span><br>` +
-            `Airflow = ${m3h.toFixed(0)} m³/h → Pressure = ${first.pressure.toFixed(0)} Pa`;
+        // Function to get product page URL
+        const getProductUrl = (fanName) => {
+            const name = fanName.toLowerCase();
+            if (mode === 'HS') {
+                return `../products/commercial/mixed-flow/${name}.html`;
+            } else {
+                return `../products/commercial/backward-centrifugal/${name}.html`;
+            }
+        };
+
+        // Create side-by-side layout
+        let resultHTML = `
+            <div style="padding: 25px; background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); border-radius: 12px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);">
+                <div style="display: grid; grid-template-columns: ${second ? '1fr 1fr' : '1fr'}; gap: 20px;">
+                    
+                    <!-- Recommended Fan Card -->
+                    <div onclick="navigateToProduct('${getProductUrl(first.fan.name)}')" style="background: #ffffff; border-radius: 10px; padding: 24px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+                        <div style="margin-bottom: 8px;">
+                            <div style="font-size: 11px; color: #dc2626; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">${TRANSLATIONS[lang].RESULT_FAN}</div>
+                            <div style="font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;">${first.fan.name}</div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Airflow</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${m3h.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">m³/h</div>
+                            </div>
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Pressure</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${first.pressure.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">Pa</div>
+                            </div>
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">CFM</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${cfm.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">CFM</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 10px; background: #dc2626; color: #ffffff; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                            View Details →
+                        </div>
+                    </div>
+        `;
 
         if (second) {
-            resultHTML += `<br><br><strong>${TRANSLATIONS[lang].ALTERNATIVE}</strong> <span style="color: #ffffff; font-weight: 700;">${second.fan.name}</span><br>` +
-                `Airflow = ${m3h.toFixed(0)} m³/h → Pressure = ${second.pressure.toFixed(0)} Pa`;
+            resultHTML += `
+                    <!-- Alternative Fan Card -->
+                    <div onclick="navigateToProduct('${getProductUrl(second.fan.name)}')" style="background: #ffffff; border-radius: 10px; padding: 24px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+                        <div style="margin-bottom: 8px;">
+                            <div style="font-size: 11px; color: #dc2626; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">${TRANSLATIONS[lang].ALTERNATIVE}</div>
+                            <div style="font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;">${second.fan.name}</div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Airflow</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${m3h.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">m³/h</div>
+                            </div>
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Pressure</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${second.pressure.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">Pa</div>
+                            </div>
+                            <div style="text-align: center; padding: 12px; background: rgba(220, 38, 38, 0.05); border-radius: 8px;">
+                                <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">CFM</div>
+                                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a;">${cfm.toFixed(0)}</div>
+                                <div style="font-size: 11px; color: #999; margin-top: 2px;">CFM</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 10px; background: #dc2626; color: #ffffff; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                            View Details →
+                        </div>
+                    </div>
+            `;
         }
+
+        resultHTML += `
+                </div>
+            </div>
+        `;
 
         output.innerHTML = resultHTML;
         currentPointDataset.data = [{ x: m3h, y: first.pressure }];
@@ -230,13 +307,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("modeSelect").addEventListener("change", function () {
         const mode = this.value;
-
+        
         // Update fan image
         const fanImage = document.getElementById("fanImage");
         if (fanImage) {
-            fanImage.src = mode === "HS"
-                ? "../src/assets/HSFan.png"
-                : "../src/assets/MSFan.png";
+            fanImage.src = mode === "HS" 
+                ? "../HSFan.png" 
+                : "../MSFan.png";
         }
 
         buildChart(mode);
@@ -255,3 +332,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// Navigation function to product page
+function navigateToProduct(url) {
+    // Store the current page URL so we can return to it
+    sessionStorage.setItem('referrerPage', window.location.href);
+    window.location.href = url;
+}

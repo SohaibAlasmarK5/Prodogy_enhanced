@@ -99,7 +99,6 @@ function calculateAirflow() {
     const h = parseFloat(document.getElementById('height').value);
     const room = document.getElementById('room').value;
     const material = document.getElementById('material').value;
-    const safetyFactor = parseFloat(document.getElementById('safetyFactor').value) || 0;
     
     if (isNaN(l) || isNaN(w) || isNaN(h)) {
         alert('Please enter valid dimensions.');
@@ -108,13 +107,7 @@ function calculateAirflow() {
     
     const volume = l * w * h;
     const ach = (roomACH[room][0] + roomACH[room][1]) / 2;
-    let airflow_m3h = volume * ach;
-    
-    // Apply safety factor
-    if (safetyFactor > 0) {
-        airflow_m3h = airflow_m3h * (1 + safetyFactor / 100);
-    }
-    
+    const airflow_m3h = volume * ach;
     const airflow_cfm = airflow_m3h / 1.699;
     
     // Display results
@@ -122,7 +115,6 @@ function calculateAirflow() {
     resultDiv.style.display = 'block';
     resultDiv.innerHTML = `
         <h3 style="margin-bottom: 1rem;">Calculation Results</h3>
-        <div class="result-value">Safety Factor: ${safetyFactor.toFixed(0)}%</div>
         <div class="result-value">Room Volume: ${volume.toFixed(2)} m³</div>
         <div class="result-value">Recommended ACH: ${ach.toFixed(1)}</div>
         <div class="result-value">Required Airflow: ${airflow_m3h.toFixed(2)} m³/h (${airflow_cfm.toFixed(1)} CFM)</div>
@@ -252,26 +244,38 @@ document.getElementById('customCFM').addEventListener('input', updateChart);
 
 // Send data to ESP Calculator
 function sendToESP() {
-    const safetyFactor = parseFloat(document.getElementById('safetyFactor').value) || 0;
-    const cfmInput = document.getElementById('cfmInput').value;
     const fanInfoText = document.getElementById('selectedFan').innerHTML;
     
-    // Extract pressure from the fan info
+    // Extract fan name from the red box
+    let fanName = '';
+    const fanNameMatch = fanInfoText.match(/<strong>Selected Fan:<\/strong>\s*([^\s&]+)/);
+    if (fanNameMatch) {
+        fanName = fanNameMatch[1];
+    }
+    
+    // Extract airflow (CFM) from the red box
+    let airflowCFM = 0;
+    const airflowMatch = fanInfoText.match(/<strong>Airflow:<\/strong>\s*([\d.]+)\s*CFM/);
+    if (airflowMatch) {
+        airflowCFM = parseFloat(airflowMatch[1]);
+    }
+    
+    // Extract pressure from the red box
     let pressure = 0;
-    const pressureMatch = fanInfoText.match(/Pressure:<\/strong>\s*([\d.]+)\s*Pa/);
+    const pressureMatch = fanInfoText.match(/<strong>Pressure:<\/strong>\s*([\d.]+)\s*Pa/);
     if (pressureMatch) {
         pressure = parseFloat(pressureMatch[1]);
     }
     
-    if (!cfmInput) {
-        alert('Please calculate airflow first before sending to ESP Calculator.');
+    if (!fanName || fanName === 'No suitable fan') {
+        alert('Please calculate airflow and select a fan first before sending to ESP Calculator.');
         return;
     }
     
     // Convert CFM to m³/h for ESP calculator
-    const airflow_m3h = parseFloat(cfmInput) * 1.699;
+    const airflow_m3h = airflowCFM * 1.699;
     
-    // Build URL with parameters
-    const url = `esp-calculator.html?sf=${safetyFactor}&af=${airflow_m3h.toFixed(2)}&p=${pressure.toFixed(1)}`;
+    // Build URL with parameters (sf now means Selected Fan)
+    const url = `esp-calculator.html?sf=${encodeURIComponent(fanName)}&af=${airflow_m3h.toFixed(2)}&p=${pressure.toFixed(1)}`;
     window.location.href = url;
 }

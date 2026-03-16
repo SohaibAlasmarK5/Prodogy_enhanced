@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HS-150P Mixed Flow Fan - Prodigy</title>
-    <link rel="icon" type="image/svg+xml" href="../../../favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="stylesheet" href="../../../styles/product-detail.css">
+    <link rel="stylesheet" href="../../../styles/product-360-viewer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <a href="../../../index.html" class="logo">
-                    <img src="../../../logo.png" alt="Prodigy Logo" class="logo-img">
+                    <img src="../../../logo.png" alt="Prodigy Logo" class="logo-img" style="width: 70px;">
                     <div class="logo-text">
                         <span class="logo-brand">PRODIGY</span>
-                        <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation
-                            Systems</span>
+                        <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation Systems</span>
                     </div>
                 </a>
                 <nav class="nav" id="mainNav">
@@ -31,12 +29,9 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a href="../../../tools/fan-selector.html" class="dropdown-item" data-en="Fan Selector Tool"
-                                data-ar="أداة اختيار المروحة">Fan Selector Tool</a>
-                            <a href="../../../tools/airflow-calculator.html" class="dropdown-item"
-                                data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow Calculator</a>
-                            <a href="../../../tools/esp-calculator.html" class="dropdown-item" data-en="ESP Calculator"
-                                data-ar="ESP حاسبة">ESP Calculator</a>
+                            <a href="../../../tools/fan-selector.html" class="dropdown-item" data-en="Fan Selector Tool" data-ar="أداة اختيار المروحة">Fan Selector Tool</a>
+                            <a href="../../../tools/airflow-calculator.html" class="dropdown-item" data-en="Airflow Calculator" data-ar="حاسبة تدفق الهواء">Airflow Calculator</a>
+                            <a href="../../../tools/esp-calculator.html" class="dropdown-item" data-en="ESP Calculator" data-ar="ESP حاسبة">ESP Calculator</a>
                         </div>
                     </div>
                     <div class="nav-dropdown">
@@ -48,29 +43,21 @@
                             <div class="products-grid">
                                 <div>
                                     <div class="product-header" data-en="Commercial" data-ar="تجاري">Commercial</div>
-                                    <a href="../inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan"
-                                        data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
-                                    <a href="../cabinet-fan.html" class="dropdown-item" data-en="Cabinet Fan"
-                                        data-ar="مروحة خزانة">Cabinet Fan</a>
-                                    <a href="../../accessories.html" class="dropdown-item" data-en="Accessories"
-                                        data-ar="الملحقات">Accessories</a>
+                                    <a href="../inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="../cabinet-fan.html" class="dropdown-item" data-en="Cabinet Fan" data-ar="مروحة خزانة">Cabinet Fan</a>
+                                    <a href="../../accessories.html" class="dropdown-item" data-en="Accessories" data-ar="الملحقات">Accessories</a>
                                 </div>
                                 <div>
                                     <div class="product-header" data-en="Residential" data-ar="سكني">Residential</div>
-                                    <a href="../inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan"
-                                        data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
-                                    <a href="../window-fan.html" class="dropdown-item" data-en="Window Fan"
-                                        data-ar="مروحة نافذة">Window Fan</a>
-                                    <a href="../../accessories.html" class="dropdown-item" data-en="Accessories"
-                                        data-ar="الملحقات">Accessories</a>
+                                    <a href="../inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
+                                    <a href="../window-fan.html" class="dropdown-item" data-en="Window Fan" data-ar="مروحة نافذة">Window Fan</a>
+                                    <a href="../../accessories.html" class="dropdown-item" data-en="Accessories" data-ar="الملحقات">Accessories</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="../../../index.html#about" class="nav-link" data-en="About Us" data-ar="من نحن">About
-                        Us</a>
-                    <a href="../../../index.html#catalogue" class="nav-link" data-en="Catalogue"
-                        data-ar="الدليل">Catalogue</a>
+                    <a href="../../../index.html#about" class="nav-link" data-en="About Us" data-ar="من نحن">About Us</a>
+                    <a href="../../../index.html#catalogue" class="nav-link" data-en="Catalogue" data-ar="الدليل">Catalogue</a>
                 </nav>
                 <div class="header-controls">
                     <button id="themeToggle" class="control-btn"><i class="fas fa-moon"></i></button>
@@ -100,16 +87,14 @@
 
                 <div class="product-main-grid">
                     <section class="product-overview">
-                        <div class="product-image">
-                            <img src="../../../src/assets/HS_150P.jpg" alt="HS-150P">
-                        </div>
+                        <!-- 360° Product Viewer -->
+                        <div class="product-360-viewer" id="product360Viewer"></div>
+                        
                         <div class="product-info">
-                            <h1 data-en="HS-150P Mixed Flow Inline Fan" data-ar="مروحة HS-150P التدفق المختلط">HS-150P
-                                Mixed Flow Inline Fan</h1>
+                            <h1 data-en="HS-150P Mixed Flow Inline Fan" data-ar="مروحة HS-150P التدفق المختلط">HS-150P Mixed Flow Inline Fan</h1>
                             <p data-en="The HS-150P is reliable for commercial use, offering high airflow and pressure performance for medium-sized duct systems."
-                                data-ar="HS-150P موثوقة للاستخدام التجاري، وتوفر أداء تدفق هواء وضغط عالي لأنظمة القنوات متوسطة الحجم.">
-                                The HS-150P is reliable for commercial use, offering high airflow and pressure
-                                performance for medium-sized duct systems.
+                               data-ar="HS-150P موثوقة للاستخدام التجاري، وتوفر أداء تدفق هواء وضغط عالي لأنظمة القنوات متوسطة الحجم.">
+                                The HS-150P is reliable for commercial use, offering high airflow and pressure performance for medium-sized duct systems.
                             </p>
                         </div>
                     </section>
@@ -122,8 +107,7 @@
                         </div>
                         <div class="specs-right">
                             <div class="specs-table">
-                                <h2 data-en="Technical Specifications" data-ar="المواصفات الفنية">Technical
-                                    Specifications</h2>
+                                <h2 data-en="Technical Specifications" data-ar="المواصفات الفنية">Technical Specifications</h2>
                                 <div class="tech-table-wrapper">
                                     <table class="tech-table">
                                         <thead>
@@ -171,6 +155,39 @@
     <script src="../../../scripts/fan-chart.js"></script>
     <script>loadFanChart("fanChart", "HS150P");</script>
     <script src="../../../script.js"></script>
+    <script src="../../navigation.js"></script>
+    <script src="../../../scripts/product-360-viewer.js"></script>
+    <script>
+        // Initialize 360° Product Viewer for HS-150P
+        const viewerContainer = document.getElementById('product360Viewer');
+        const viewer = new Product360Viewer(viewerContainer, {
+            images: [
+                '../../../Media/HS-150P/hs150-view-01-top-front.png',
+                '../../../Media/HS-150P/hs150-view-02-front-angle.png',
+                '../../../Media/HS-150P/hs150-view-03-top-detail.png',
+                '../../../Media/HS-150P/hs150-view-04-top-mount.png',
+                '../../../Media/HS-150P/hs150-view-05-label-detail.png',
+                '../../../Media/HS-150P/hs150-view-06-parts-exploded.png',
+                '../../../Media/HS-150P/hs150-view-07-motor-back.png',
+                '../../../Media/HS-150P/hs150-view-08-motor-internal.png',
+                '../../../Media/HS-150P/hs150-view-09-back-angle.png',
+                '../../../Media/HS-150P/hs150-view-10-front-blade.png'
+            ],
+            labels: [
+                '<span data-en="Top Front" data-ar="أمامي علوي">Top Front</span>',
+                '<span data-en="Front Angle" data-ar="زاوية أمامية">Front Angle</span>',
+                '<span data-en="Top Detail" data-ar="تفاصيل علوية">Top Detail</span>',
+                '<span data-en="Mount View" data-ar="عرض التثبيت">Mount View</span>',
+                '<span data-en="Label" data-ar="الملصق">Label</span>',
+                '<span data-en="Parts" data-ar="القطع">Parts</span>',
+                '<span data-en="Motor" data-ar="المحرك">Motor</span>',
+                '<span data-en="Internal" data-ar="داخلي">Internal</span>',
+                '<span data-en="Back Angle" data-ar="زاوية خلفية">Back Angle</span>',
+                '<span data-en="Blade View" data-ar="عرض الشفرة">Blade View</span>'
+            ],
+            autoRotate: false,
+            autoRotateSpeed: 200
+        });
+    </script>
 </body>
-
 </html>
