@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="stylesheet" href="../../../styles/product-detail.css">
+    <link rel="stylesheet" href="../../../styles/product-360-viewer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="../../../index.html" class="logo">
-                    <img src="../../../logo.png" alt="Prodigy Logo" class="logo-img" style="width: 70px;">
+                    <img src="../../../Media/logo.png" alt="Prodigy Logo" class="logo-img" style="width: 70px;">
                     <div class="logo-text">
                         <span class="logo-brand">PRODIGY</span>
                         <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation Systems</span>
@@ -86,9 +87,9 @@
 
                 <div class="product-main-grid">
                     <section class="product-overview">
-                        <div class="product-image">
-                            <img src="../../../HSFan.png" alt="HS-200P">
-                        </div>
+                        <!-- 360° Product Viewer -->
+                        <div data-360-viewer="HS-200P"></div>
+                        
                         <div class="product-info">
                             <h1 data-en="HS-200P Mixed Flow Inline Fan" data-ar="مروحة HS-200P التدفق المختلط">HS-200P Mixed Flow Inline Fan</h1>
                             <p data-en="The HS-200P delivers high-performance airflow for large commercial applications, combining powerful air movement with efficient energy consumption."
@@ -153,6 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../../scripts/fan-chart.js"></script>
     <script>loadFanChart("fanChart", "HS200P");</script>
+    <script src="../../../scripts/product-360-viewer.js"></script>
     <script src="../../../script.js"></script>
     <script src="../../navigation.js"></script>
 </body>

@@ -312,8 +312,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const fanImage = document.getElementById("fanImage");
         if (fanImage) {
             fanImage.src = mode === "HS" 
-                ? "../HSFan.png" 
-                : "../MSFan.png";
+                ? "../Media/HSFan.png" 
+                : "../Media/MSFan.png";
         }
 
         buildChart(mode);

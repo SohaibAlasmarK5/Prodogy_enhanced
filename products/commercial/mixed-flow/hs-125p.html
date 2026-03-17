@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="stylesheet" href="../../../styles/product-detail.css">
+    <link rel="stylesheet" href="../../../styles/product-360-viewer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="../../../index.html" class="logo">
-                    <img src="../../../logo.png" alt="Prodigy Logo" class="logo-img" style="width: 70px;">
+                    <img src="../../../Media/logo.png" alt="Prodigy Logo" class="logo-img" style="width: 70px;">
                     <div class="logo-text">
                         <span class="logo-brand">PRODIGY</span>
                         <span class="logo-subtitle" data-en="Ventilation Systems" data-ar="أنظمة التهوية">Ventilation Systems</span>
@@ -49,7 +50,7 @@
                                 <div>
                                     <div class="product-header" data-en="Residential" data-ar="سكني">Residential</div>
                                     <a href="../inline-duct-fan.html" class="dropdown-item" data-en="In-Line Duct Fan" data-ar="مروحة دكت داخلية">In-Line Duct Fan</a>
-                                    <a href="../window-fan.html" class="dropdown-item" data-en="Window Fan" data-ar="مروحة نافذة">Window Fan</a>
+                                    <a href="../window-fan.html" class="dropdown-item" data-en="Window Fan" data-ar="مروحة نافذ��">Window Fan</a>
                                     <a href="../../accessories.html" class="dropdown-item" data-en="Accessories" data-ar="الملحقات">Accessories</a>
                                 </div>
                             </div>
@@ -86,9 +87,9 @@
 
                 <div class="product-main-grid">
                     <section class="product-overview">
-                        <div class="product-image">
-                            <img src="../../../HSFan.png" alt="HS-125P">
-                        </div>
+                        <!-- 360° Product Viewer -->
+                        <div data-360-viewer="HS-125P"></div>
+                        
                         <div class="product-info">
                             <h1 data-en="HS-125P Mixed Flow Inline Fan" data-ar="مروحة HS-125P التدفق المختلط">HS-125P Mixed Flow Inline Fan</h1>
                             <p data-en="The HS-125P Mixed Flow Inline Fan provides stable airflow performance for residential and light commercial applications with efficient operation and low noise levels."
@@ -153,6 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../../scripts/fan-chart.js"></script>
     <script>loadFanChart("fanChart", "HS125P");</script>
+    <script src="../../../scripts/product-360-viewer.js"></script>
     <script src="../../../script.js"></script>
     <script src="../../navigation.js"></script>
 </body>

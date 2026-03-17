@@ -125,17 +125,28 @@ body {
 .product-image {
     flex: 1;
     min-width: 400px;
-    background: white;
+    background: #f5f5f5;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .product-image {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 25px rgba(255, 255, 255, 0.02);
 }
 
 .product-image img {
     width: 100%;
     height: auto;
     display: block;
-    mix-blend-mode: multiply;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .product-image img {
+    /* Better blending in dark mode - removes white backgrounds */
+    filter: brightness(0.95) contrast(1.1);
+    background: transparent;
 }
 
 .product-info {
