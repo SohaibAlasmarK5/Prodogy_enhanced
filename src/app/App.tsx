@@ -1,4 +1,4 @@
-import { Wind, ShieldCheck, Wrench, Phone, Mail, MapPin, Award, Users, Clock, ChevronDown, Globe, Lightbulb, CheckCircle, UserCheck, ArrowRight, Facebook, Instagram, Twitter, Linkedin, Youtube, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Wind, ShieldCheck, Phone, Mail, MapPin, Award, Users, Clock, ChevronDown, Globe, Lightbulb, CheckCircle, UserCheck, ArrowRight, Facebook, Instagram, Twitter, Linkedin, Youtube, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
@@ -56,7 +56,7 @@ export default function App() {
           </div>
           <nav className="hidden lg:flex items-center gap-6">
             <a href="#home" className="text-primary transition-colors">Home</a>
-            
+
             <div className="relative group">
               <button className="hover:text-primary transition-colors flex items-center gap-1">
                 Technical Support
@@ -100,9 +100,9 @@ export default function App() {
       {/* Hero Section */}
       <section id="home" className="hero-slider">
         <div className="relative h-[600px] flex items-center justify-center bg-gray-900">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ 
+            style={{
               backgroundImage: `url(${slides[currentSlide].image})`,
               opacity: 0.4
             }}
@@ -243,7 +243,7 @@ export default function App() {
                 <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <ShieldCheck className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl mb-3">Commercial HVAC</h3>
+                <h3 className="text-xl mb-3">Commercial ventilation</h3>
                 <p className="text-gray-600 mb-4">
                   Complete HVAC solutions for offices, retail spaces, and commercial buildings.
                 </p>
@@ -258,16 +258,16 @@ export default function App() {
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Wrench className="w-8 h-8 text-primary" />
+                  <ShieldCheck className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl mb-3">Maintenance & Repair</h3>
+                <h3 className="text-xl mb-3">Insurance Services</h3>
                 <p className="text-gray-600 mb-4">
-                  Professional maintenance and repair services to keep your systems running smoothly.
+                  Comprehensive insurance solutions to protect you and your assets with confidence.
                 </p>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Regular inspections</li>
-                  <li>• Emergency repairs</li>
-                  <li>• System upgrades</li>
+                  <li>• Coverage consultation</li>
+                  <li>• Claims assistance</li>
+                  <li>• Policy management</li>
                 </ul>
               </CardContent>
             </Card>
@@ -318,7 +318,7 @@ export default function App() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1647022528152-52ed9338611d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxIVkFDJTIwYWlyJTIwY29uZGl0aW9uaW5nfGVufDF8fHx8MTc3MjkyMDMwMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="HVAC system"
                 className="rounded-lg shadow-xl w-full"
@@ -444,8 +444,8 @@ export default function App() {
               <h4 className="mb-4">Services</h4>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-primary transition-colors">Industrial Ventilation</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Commercial HVAC</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Maintenance & Repair</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Commercial ventilation</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Insurance Services</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">System Design</a></li>
               </ul>
             </div>
