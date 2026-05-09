@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const slides = [
     {
       title: "Clean Air Starts with Prodigy",
@@ -367,7 +367,7 @@ export default function App() {
                     </div>
                     <div>
                       <div className="font-medium">Phone</div>
-                      <div className="text-gray-600">+971 50 313 4010</div>
+                      <div className="text-gray-600">+971 9 228 9674</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -467,7 +467,7 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  +971 50 313 4010
+                  +971 9 228 9674
                 </li>
                 <li className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-1" />
