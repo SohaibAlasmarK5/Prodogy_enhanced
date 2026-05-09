@@ -169,9 +169,12 @@
 }
 
 @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 6px 20px rgba(220, 38, 38, 0.25);
     }
+
     50% {
         box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
     }
@@ -217,7 +220,7 @@
 .chart-container {
     position: relative;
     height: 500px;
-    width: 100%;\
+    width: 100%;
     padding: 1rem;
     background: var(--color-bg-light);
     border-radius: 0.75rem;
@@ -565,7 +568,9 @@
 }
 
 @keyframes spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* Responsive Adjustments */
@@ -815,7 +820,7 @@
 /* Footer Logo Text Override for Tools Pages */
 .footer-logo-text .logo-brand {
     color: #ffffff !important;
-    font-size: 1.25rem;
+    font-size: 1.65rem;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
@@ -823,7 +828,7 @@
 .footer-logo-text .logo-subtitle {
     color: var(--color-primary) !important;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 [data-theme="dark"] .footer-logo-text .logo-brand {
