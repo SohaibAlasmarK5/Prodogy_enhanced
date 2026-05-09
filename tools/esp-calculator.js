@@ -1,45 +1,56 @@
 // ESP Calculator JavaScript
 
 // Read URL parameters for data from Airflow Calculator
-(function() {
+(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const sf = urlParams.get('sf');
     const af = urlParams.get('af');
     const p = urlParams.get('p');
-    
+
     if (sf !== null || af !== null || p !== null) {
         const dataBox = document.getElementById('airflowData');
         dataBox.style.display = 'block';
-        
+
         if (sf !== null) {
             document.getElementById('displaySF').textContent = decodeURIComponent(sf);
         }
-        
+
         if (af !== null) {
             const airflowValue = parseFloat(af);
             // Convert m³/h to CFM for display
-            const airflowCFM = airflowValue / 1.699;
+            const airflowCFM = airflowValue * 0.59;
             document.getElementById('displayAF').textContent = airflowCFM.toFixed(1) + ' CFM';
-            
+
             // Pre-fill the airflow input
             setTimeout(() => {
                 const flowValInput = document.getElementById('flowVal');
                 const flowUnitSelect = document.getElementById('flowUnit');
                 if (flowValInput && flowUnitSelect) {
-                    flowUnitSelect.value = 'm3h';
-                    flowValInput.value = airflowValue.toFixed(2);
+                    flowUnitSelect.value = 'cfm';
+                    flowValInput.value = airflowCFM.toFixed(2);
                     // Trigger calculation to update derived values
                     flowValInput.dispatchEvent(new Event('input'));
                 }
             }, 100);
         }
-        
+
         if (p !== null) {
             document.getElementById('displayP').textContent = parseFloat(p).toFixed(1) + ' Pa';
         }
     }
 })();
+document.getElementById('flowUnit').addEventListener('change', function () {
+    const unit = this.value;
+    const airflowInput = document.getElementById('flowVal'); // change to your actual input id
 
+    if (unit === 'cfm') {
+        // convert m³/h to CFM
+        airflowInput.value = (parseFloat(airflowInput.value) / 1.699).toFixed(2);
+    } else if (unit === 'm3h') {
+        // convert CFM to m³/h
+        airflowInput.value = (parseFloat(airflowInput.value) * 1.699).toFixed(2);
+    }
+});
 // Friction Table Data
 const frictionTable = [
     { D: 100, vals: [0.730, 1.507, 2.537, 3.813, 5.332, 7.092, 9.091, 11.327, 13.799] },
@@ -185,69 +196,69 @@ function calculateESP() {
     const ductTypeKey = E.ductType.value === 'PI' || E.ductType.value === 'GI' ? 'GI_PI' : 'flex';
     let breakdown = [];
     let totalESP = friction * L;
-    
-    breakdown.push({ 
-        name: `Friction Loss (${L} m)`, 
-        details: `${friction.toFixed(2)} Pa/m`, 
-        loss: (friction * L).toFixed(1) 
+
+    breakdown.push({
+        name: `Friction Loss (${L} m)`,
+        details: `${friction.toFixed(2)} Pa/m`,
+        loss: (friction * L).toFixed(1)
     });
-    
+
     if (E.useElbow90.checked) {
         const k = getElbowK('90', E.elbow90Type.value, ductTypeKey);
         const qty = parseFloat(E.elbow90Qty.value) || 0;
         const loss = (k * 0.5 * 1.2 * V * V) * qty;
         totalESP += loss;
-        breakdown.push({ 
-            name: '90° Elbow', 
-            details: `Qty: ${qty}, Type: ${E.elbow90Type.value}`, 
-            loss: loss.toFixed(1) 
+        breakdown.push({
+            name: '90° Elbow',
+            details: `Qty: ${qty}, Type: ${E.elbow90Type.value}`,
+            loss: loss.toFixed(1)
         });
     }
-    
+
     if (E.useElbow45.checked) {
         const k = getElbowK('45', E.elbow45Type.value, ductTypeKey);
         const qty = parseFloat(E.elbow45Qty.value) || 0;
         const loss = (k * 0.5 * 1.2 * V * V) * qty;
         totalESP += loss;
-        breakdown.push({ 
-            name: '45° Elbow', 
-            details: `Qty: ${qty}, Type: ${E.elbow45Type.value}`, 
-            loss: loss.toFixed(1) 
+        breakdown.push({
+            name: '45° Elbow',
+            details: `Qty: ${qty}, Type: ${E.elbow45Type.value}`,
+            loss: loss.toFixed(1)
         });
     }
-    
+
     if (E.useFilter.checked) {
         const fPa = parseFloat(E.filterCustom.value) || parseFloat(E.filterSelect.value) || 0;
         totalESP += fPa;
-        breakdown.push({ 
-            name: 'Filter', 
-            details: `${fPa} Pa`, 
-            loss: fPa.toFixed(1) 
+        breakdown.push({
+            name: 'Filter',
+            details: `${fPa} Pa`,
+            loss: fPa.toFixed(1)
         });
     }
-    
+
     if (E.useDamper.checked) {
         const dPa = parseFloat(E.damperPa.value) || 0;
         totalESP += dPa;
-        breakdown.push({ 
-            name: 'Damper', 
-            details: `${dPa} Pa`, 
-            loss: dPa.toFixed(1) 
+        breakdown.push({
+            name: 'Damper',
+            details: `${dPa} Pa`,
+            loss: dPa.toFixed(1)
         });
     }
-    
+
     if (E.useOther.checked) {
         const oPa = parseFloat(E.otherPa.value) || 0;
         totalESP += oPa;
-        breakdown.push({ 
-            name: 'Other', 
-            details: `${oPa} Pa`, 
-            loss: oPa.toFixed(1) 
+        breakdown.push({
+            name: 'Other',
+            details: `${oPa} Pa`,
+            loss: oPa.toFixed(1)
         });
     }
-    
+
     E.espResult.textContent = `ESP = ${totalESP.toFixed(1)} Pa`;
-    E.breakdownBody.innerHTML = breakdown.map(b => 
+    E.breakdownBody.innerHTML = breakdown.map(b =>
         `<tr><td>${b.name}</td><td>${b.details}</td><td>${b.loss}</td></tr>`
     ).join('');
     E.breakdownTotal.textContent = totalESP.toFixed(1);
@@ -275,10 +286,10 @@ E.ductType.addEventListener('change', () => {
 });
 
 const allInputs = [
-    E.diaMm, E.wMm, E.hMm, E.ductLen, E.flowVal, E.flowUnit, 
-    E.ductType, E.ductShape, E.elbow90Type, E.elbow90Qty, 
-    E.useElbow90, E.elbow45Type, E.elbow45Qty, E.useElbow45, 
-    E.filterSelect, E.filterCustom, E.useFilter, E.damperPa, 
+    E.diaMm, E.wMm, E.hMm, E.ductLen, E.flowVal, E.flowUnit,
+    E.ductType, E.ductShape, E.elbow90Type, E.elbow90Qty,
+    E.useElbow90, E.elbow45Type, E.elbow45Qty, E.useElbow45,
+    E.filterSelect, E.filterCustom, E.useFilter, E.damperPa,
     E.useDamper, E.otherPa, E.useOther, E.flexQual
 ];
 
