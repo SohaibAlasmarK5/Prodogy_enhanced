@@ -14,14 +14,7 @@ const PRODUCT_IMAGES = {
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG',
-            '11.JPG',
-            '12.JPG'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_100P_125P.jpg'
     },
@@ -34,15 +27,7 @@ const PRODUCT_IMAGES = {
             '3.JPG',
             '4.JPG',
             '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG',
-            '11.JPG',
-            '12.JPG',
-            '13.JPG',
-            '14.JPG'
+            '6.mp4'
         ],
         fallback: '../../../Media/HS_100P_125P.jpg'
     },
@@ -55,11 +40,7 @@ const PRODUCT_IMAGES = {
             '3.JPG',
             '4.JPG',
             '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG'
+            '6.mp4'
         ],
         fallback: '../../../Media/HS_150P.jpg'
     },
@@ -71,16 +52,7 @@ const PRODUCT_IMAGES = {
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG',
-            '11.JPG',
-            '12.JPG',
-            '13.JPG',
-            '14.JPG'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_200P.jpg'
     },
@@ -92,14 +64,7 @@ const PRODUCT_IMAGES = {
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG',
-            '11.JPG',
-            '12.JPG'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_250P_315P.jpg'
     },
@@ -111,14 +76,7 @@ const PRODUCT_IMAGES = {
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.JPG',
-            '7.JPG',
-            '8.JPG',
-            '9.JPG',
-            '10.JPG',
-            '11.JPG',
-            '12.JPG'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_250P_315P.jpg'
     }
@@ -159,7 +117,9 @@ class Product360Viewer {
         this.preloadImages();
         this.attachEventListeners();
     }
-
+    isVideo(filename) {
+        return /\.(mp4|webm|ogg)$/i.test(filename);
+    }
     createViewerHTML() {
         this.container.innerHTML = `
             <div class="viewer-360-container">
@@ -210,17 +170,19 @@ class Product360Viewer {
     }
 
     createThumbnails() {
-        return this.productData.images.map((image, index) => `
+        return this.productData.images.map((file, index) => {
+            const isVid = this.isVideo(file);
+            const thumbSrc = isVid ? this.productData.fallback : this.productData.basePath + file;
+            return `
             <div class="viewer-360-thumbnail ${index === 0 ? 'active' : ''}" 
-                 data-index="${index}"
-                 title="View ${index + 1}">
-                <img src="${this.productData.basePath}${image}" 
-                     alt="View ${index + 1}"
+                 data-index="${index}" title="View ${index + 1}">
+                <img src="${thumbSrc}" alt="View ${index + 1}"
                      onerror="this.src='${this.productData.fallback}'">
+                ${isVid ? '<span class="video-badge"><i class="fas fa-play"></i></span>' : ''}
             </div>
-        `).join('');
+        `;
+        }).join('');
     }
-
     cacheElements() {
         this.mainImage = document.getElementById('viewer360MainImage');
         this.loadingOverlay = this.container.querySelector('.viewer-360-loading');
@@ -236,27 +198,30 @@ class Product360Viewer {
     preloadImages() {
         this.loadingOverlay.style.display = 'flex';
         let loadedCount = 0;
-        const totalImages = this.productData.images.length;
+        const imageFiles = this.productData.images.filter(f => !this.isVideo(f));
+        const totalToLoad = imageFiles.length || 1;
 
-        this.productData.images.forEach((imageName, index) => {
+        this.productData.images.forEach((file, index) => {
+            if (this.isVideo(file)) {
+                this.preloadedImages[index] = { type: 'video', src: this.productData.basePath + file };
+                loadedCount++;  // count it immediately
+                if (loadedCount === this.productData.images.length) this.onImagesLoaded();
+                return;
+            }
             const img = new Image();
-            img.onload = () => {
-                loadedCount++;
-                if (loadedCount === totalImages) {
-                    this.onImagesLoaded();
-                }
-            };
             img.onerror = () => {
-                // Use fallback on error
-                console.warn(`Failed to load: ${imageName}, using fallback`);
                 img.src = this.productData.fallback;
+                this.preloadedImages[index] = { type: 'image', el: img, src: this.productData.fallback }; // ← use fallback src
                 loadedCount++;
-                if (loadedCount === totalImages) {
-                    this.onImagesLoaded();
-                }
+                if (loadedCount === this.productData.images.length) this.onImagesLoaded();
             };
-            img.src = this.productData.basePath + imageName;
-            this.preloadedImages[index] = img;
+            img.onload = () => {
+                this.preloadedImages[index] = { type: 'image', el: img, src: img.src }; // ← only set after confirmed loaded
+                loadedCount++;
+                if (loadedCount === this.productData.images.length) this.onImagesLoaded();
+            };
+            img.src = this.productData.basePath + file;
+            this.preloadedImages[index] = { type: 'image', el: img, src: img.src };
         });
     }
 
@@ -268,16 +233,41 @@ class Product360Viewer {
 
     showImage(index) {
         if (!this.imagesLoaded || !this.preloadedImages[index]) return;
-
         this.currentImageIndex = index;
-        this.mainImage.src = this.preloadedImages[index].src;
 
-        // Update active thumbnail
-        this.thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === index);
-        });
+        const media = this.preloadedImages[index];
+        const wrapper = this.container.querySelector('.viewer-360-image-wrapper');
 
-        // Scroll thumbnail into view
+        // Remove existing media element
+        wrapper.querySelectorAll('img.viewer-360-image, video.viewer-360-image').forEach(el => el.remove());
+
+        if (media.type === 'video') {
+            const video = document.createElement('video');
+            video.src = media.src;
+            video.className = 'viewer-360-image';
+            video.controls = true;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true; // required for autoplay in most browsers
+            wrapper.prepend(video);
+            this.mainImage = video;
+        } else {
+            const img = document.createElement('img');
+            img.src = media.src;
+            img.className = 'viewer-360-image';
+            img.alt = `${this.productModel} - View ${index + 1}`;
+            img.draggable = false;
+            wrapper.prepend(img);
+            this.mainImage = img;
+
+            // Re-attach drag listeners since it's a new element
+            img.addEventListener('mousedown', this.onDragStart.bind(this));
+            img.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: false });
+            img.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false });
+            img.addEventListener('touchend', this.onDragEnd.bind(this));
+        }
+
+        this.thumbnails.forEach((thumb, i) => thumb.classList.toggle('active', i === index));
         this.scrollThumbnailIntoView(index);
     }
 
