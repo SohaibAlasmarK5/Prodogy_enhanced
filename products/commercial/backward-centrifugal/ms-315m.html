@@ -114,24 +114,40 @@
                     </div>
                 </section>
 
-                <!-- Product Gallery Section -->
-                <section class="product-gallery">
-                    <h2 data-en="Product Images" data-ar="صور المنتج">Product Images</h2>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1718118479623-c65e34b2c828?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwY2VudHJpZnVnYWwlMjBmYW4lMjB2ZW50aWxhdGlvbnxlbnwxfHx8fDE3NzM3MTE3OTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                alt="Industrial Fan">
+                <section class="product-specs">
+                    <div class="specs-left">
+                        <div class="chart-container">
+                            <canvas id="fanChart" data-fan-key="MS315M"></canvas>
                         </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1740276788970-e7f92ae6546e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxodmFjJTIwZmFuJTIwbW90b3IlMjBjbG9zZSUyMHVwfGVufDF8fHx8MTc3MzcxMTgwMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                alt="HVAC Motor">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1760537760008-5fd5b1f872d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwYWlyJTIwZHVjdCUyMHN5c3RlbXxlbnwxfHx8fDE3NzM3MTE4MDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                alt="Air Duct System">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="../../../Media/MSFan.png" alt="MS-315M Fan">
+                    </div>
+                    <div class="specs-right">
+                        <div class="specs-table">
+                            <h2 data-en="Technical Specifications" data-ar="المواصفات الفنية">Technical Specifications
+                            </h2>
+                            <div class="tech-table-wrapper">
+                                <table class="tech-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-en="Power (W)" data-ar="الطاقة">Power (W)</th>
+                                            <th data-en="Airflow (m³/h)" data-ar="تدفق الهواء">Airflow (m³/h)</th>
+                                            <th data-en="Pressure (Pa)" data-ar="الضغط">Pressure (Pa)</th>
+                                            <th data-en="Diameter" data-ar="القطر">Diameter</th>
+                                            <th data-en="Noise (dB)" data-ar="الضوضاء">Noise (dB)</th>
+                                            <th data-en="Weight (kg)" data-ar="الوزن">Weight (kg)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>260W</td>
+                                            <td>1900 m³/h</td>
+                                            <td>700 Pa</td>
+                                            <td>Ø315 mm</td>
+                                            <td>65 dB</td>
+                                            <td>7.8 kg</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </section>
