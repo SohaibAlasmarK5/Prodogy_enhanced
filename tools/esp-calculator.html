@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/tools.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -130,6 +131,12 @@
                             data-ar="الضغط">Pressure</div>
                         <div id="displayP" style="font-size: 1.5rem; font-weight: 700;">-</div>
                     </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <button id="downloadPdfBtn" onclick="downloadPDF()"
+                        style="background: white; color: #059669; border: 2px solid white; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;">
+                        <i class="fas fa-file-pdf" style="margin-right: 0.5rem;"></i> Download PDF
+                    </button>
                 </div>
             </div>
 

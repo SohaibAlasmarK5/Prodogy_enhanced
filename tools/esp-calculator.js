@@ -313,3 +313,75 @@ E.resetBtn.addEventListener('click', () => {
 
 // Initialize
 calculateESP();
+function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const fanName = document.getElementById('displaySF').textContent;
+    const airflow = document.getElementById('displayAF').textContent;
+    const fanPressure = parseFloat(document.getElementById('displayP').textContent) || 0;
+    const espTotal = parseFloat(E.breakdownTotal.textContent) || 0;
+    const pressureAfterESP = Math.max(0, fanPressure - espTotal).toFixed(1);
+
+    // Header
+    doc.setFillColor(220, 38, 38);
+    doc.rect(0, 0, 210, 30, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Prodigy Ventilation Systems', 15, 13);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Fan Selection Report', 15, 23);
+
+    // Date
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.text(new Date().toLocaleDateString(), 195, 23, { align: 'right' });
+
+    // Section title
+    doc.setTextColor(30, 30, 30);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Selected Fan Data', 15, 45);
+
+    // Line under title
+    doc.setDrawColor(220, 38, 38);
+    doc.setLineWidth(0.8);
+    doc.line(15, 47, 195, 47);
+
+    // Data rows
+    const rows = [
+        ['Fan Name', fanName],
+        ['Airflow', airflow],
+        ['Fan Pressure', fanPressure.toFixed(1) + ' Pa'],
+        ['Total ESP', espTotal.toFixed(1) + ' Pa'],
+        ['Pressure After ESP Resistance', pressureAfterESP + ' Pa'],
+    ];
+
+    let y = 58;
+    doc.setFontSize(11);
+    rows.forEach(([label, value], i) => {
+        if (i % 2 === 0) {
+            doc.setFillColor(245, 245, 245);
+            doc.rect(15, y - 6, 180, 10, 'F');
+        }
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(80, 80, 80);
+        doc.text(label + ':', 18, y);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(30, 30, 30);
+        doc.text(value, 105, y);
+        y += 14;
+    });
+
+    // Footer
+    doc.setFillColor(245, 245, 245);
+    doc.rect(0, 280, 210, 17, 'F');
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Prodigy Ventilation Systems — info@prodigysystems.ae — +971 9 228 9674', 105, 290, { align: 'center' });
+
+    doc.save(`Fan-Report-${fanName}.pdf`);
+}
