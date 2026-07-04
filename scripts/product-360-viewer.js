@@ -21,13 +21,12 @@ const PRODUCT_IMAGES = {
     'HS-125P': {
         basePath: '../../../Media/HS-125P/',
         images: [
-            'HS.JPG',
+            'Hs.JPG',
             '1.JPG',
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.mp4'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_100P_125P.jpg'
     },
@@ -39,8 +38,7 @@ const PRODUCT_IMAGES = {
             '2.JPG',
             '3.JPG',
             '4.JPG',
-            '5.JPG',
-            '6.mp4'
+            '5.mp4'
         ],
         fallback: '../../../Media/HS_150P.jpg'
     },
