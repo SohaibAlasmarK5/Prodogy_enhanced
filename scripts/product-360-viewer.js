@@ -245,6 +245,7 @@ class Product360Viewer {
             video.className = 'viewer-360-image';
             video.controls = true;
             video.autoplay = true;
+            video.preload = 'metadata';
             video.loop = true;
             video.muted = true; // required for autoplay in most browsers
             wrapper.prepend(video);
