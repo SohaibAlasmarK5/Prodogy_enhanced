@@ -6,8 +6,9 @@
     const sf = urlParams.get('sf');
     const af = urlParams.get('af');
     const p = urlParams.get('p');
+    const room = urlParams.get('room');
 
-    if (sf !== null || af !== null || p !== null) {
+    if (sf !== null || af !== null || p !== null || room !== null) {
         const dataBox = document.getElementById('airflowData');
         dataBox.style.display = 'block';
 
@@ -17,7 +18,7 @@
 
         if (af !== null) {
             const airflowValue = parseFloat(af);
-            dataBox.dataset.rawAirflowM3h = airflowValue;   // NEW
+            dataBox.dataset.rawAirflowM3h = airflowValue;
             // Convert m³/h to CFM for display
             const airflowCFM = airflowValue * 0.59;
             document.getElementById('displayAF').textContent = airflowCFM.toFixed(1) + ' CFM';
@@ -36,8 +37,12 @@
         }
 
         if (p !== null) {
-            dataBox.dataset.rawPressure = parseFloat(p);   // NEW
+            dataBox.dataset.rawPressure = parseFloat(p);
             document.getElementById('displayP').textContent = parseFloat(p).toFixed(1) + ' Pa';
+        }
+
+        if (room !== null) {
+            dataBox.dataset.roomType = decodeURIComponent(room);
         }
     }
 })();
@@ -318,19 +323,19 @@ calculateESP();
 
 // Technical specs for models reachable via the Airflow → ESP handoff
 const FAN_TECH_SPECS = {
-    'HS-100P': { airflow: 198,  voltage: '220-240V-/50Hz', rpm: 2200, power: 26,  amps: 0.12, noise: 31 },
-    'HS-150P': { airflow: 530,  voltage: '220-240V-/50Hz', rpm: 2550, power: 54,  amps: 0.22, noise: 33 },
-    'HS-200P': { airflow: 840,  voltage: '220-240V-/50Hz', rpm: 2450, power: 128, amps: 0.53, noise: 63 },
+    'HS-100P': { airflow: 198, voltage: '220-240V-/50Hz', rpm: 2200, power: 26, amps: 0.12, noise: 31 },
+    'HS-150P': { airflow: 530, voltage: '220-240V-/50Hz', rpm: 2550, power: 54, amps: 0.22, noise: 33 },
+    'HS-200P': { airflow: 840, voltage: '220-240V-/50Hz', rpm: 2450, power: 128, amps: 0.53, noise: 63 },
     'HS-250P': { airflow: 1405, voltage: '220-240V-/50Hz', rpm: 2450, power: 225, amps: 1.20, noise: 66 },
     'HS-315P': { airflow: 2206, voltage: '220-240V-/50Hz', rpm: 2350, power: 390, amps: 1.90, noise: 69 },
-    'MS-100M': { airflow: 310,  voltage: '220-240V-/50Hz', rpm: 2350, power: 85,  amps: 0.32, noise: 52 },
-    'MS-150M': { airflow: 720,  voltage: '220-240V-/50Hz', rpm: 2400, power: 105, amps: 0.45, noise: 53 },
+    'MS-100M': { airflow: 310, voltage: '220-240V-/50Hz', rpm: 2350, power: 85, amps: 0.32, noise: 52 },
+    'MS-150M': { airflow: 720, voltage: '220-240V-/50Hz', rpm: 2400, power: 105, amps: 0.45, noise: 53 },
     'MS-200M': { airflow: 1120, voltage: '220-240V-/50Hz', rpm: 2450, power: 160, amps: 0.72, noise: 60 },
     'MS-250M': { airflow: 1320, voltage: '220-240V-/50Hz', rpm: 2450, power: 182, amps: 0.83, noise: 62 },
     'MS-315M': { airflow: 1900, voltage: '220-240V-/50Hz', rpm: 2450, power: 260, amps: 0.84, noise: 65 }
 };
 
-// "MS-200M" -> "MS200" / "HS-100P" -> "HS100P" (matches keys in FAN_DATA from fan-data.js)
+// "MS-200M" -> "MS200" / "HS-100P" -> "HS100P" (matches keys in FAN_DATA)
 function toFanDataKey(name) {
     let k = name.replace('-', '');
     if (k.startsWith('MS')) k = k.replace(/M$/, '');
@@ -346,12 +351,39 @@ function loadImageAsDataURL(src) {
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
             canvas.getContext('2d').drawImage(img, 0, 0);
-            try { resolve(canvas.toDataURL('image/jpeg', 0.92)); }
-            catch (e) { reject(e); }
+
+            try {
+                resolve(canvas.toDataURL('image/png'));
+            } catch (e) {
+                reject(e);
+            }
         };
         img.onerror = reject;
         img.src = src;
     });
+}
+
+
+// Catmull-Rom spline: turns sparse data points into a smooth curve
+function smoothPoints(points, segments = 12) {
+    if (points.length < 3) return points;
+    const result = [];
+    for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[i - 1] || points[i];
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        const p3 = points[i + 2] || p2;
+        for (let t = 0; t < segments; t++) {
+            const tt = t / segments;
+            const tt2 = tt * tt;
+            const tt3 = tt2 * tt;
+            const x = 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * tt + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * tt2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * tt3);
+            const y = 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * tt + (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * tt2 + (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * tt3);
+            result.push({ x, y });
+        }
+    }
+    result.push(points[points.length - 1]);
+    return result;
 }
 
 // Draws the pressure-vs-airflow curve directly with jsPDF vector calls (no chart library needed in the PDF)
@@ -382,12 +414,14 @@ function drawPerformanceChart(doc, x, y, w, h, points, maxX, maxY, selected) {
     doc.text('Air volume (m³/h)', plotX + plotW / 2, plotY + plotH + 8, { align: 'center' });
     doc.text('Pa', plotX - 8, plotY - 1);
 
+    const smooth = smoothPoints(points);
+
     doc.setDrawColor(220, 38, 38);
     doc.setLineWidth(0.6);
-    for (let i = 0; i < points.length - 1; i++) {
+    for (let i = 0; i < smooth.length - 1; i++) {
         doc.line(
-            plotX + (points[i].x / maxX) * plotW,     plotY + plotH - (points[i].y / maxY) * plotH,
-            plotX + (points[i+1].x / maxX) * plotW,   plotY + plotH - (points[i+1].y / maxY) * plotH
+            plotX + (smooth[i].x / maxX) * plotW, plotY + plotH - (smooth[i].y / maxY) * plotH,
+            plotX + (smooth[i + 1].x / maxX) * plotW, plotY + plotH - (smooth[i + 1].y / maxY) * plotH
         );
     }
 
@@ -406,7 +440,9 @@ async function downloadPDF() {
     const fanPressure = parseFloat(document.getElementById('displayP').textContent) || 0;
     const espTotal = parseFloat(E.breakdownTotal.textContent) || 0;
     const pressureAfterESP = Math.max(0, fanPressure - espTotal).toFixed(1);
-    const rawAirflowM3h = parseFloat(document.getElementById('airflowData').dataset.rawAirflowM3h) || 0;
+    const dataBox = document.getElementById('airflowData');
+    const rawAirflowM3h = parseFloat(dataBox.dataset.rawAirflowM3h) || 0;
+    const roomType = dataBox.dataset.roomType || '';
 
     // Header
     doc.setFillColor(220, 38, 38);
@@ -418,24 +454,18 @@ async function downloadPDF() {
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
     doc.text('Fan Selection Report', 15, 23);
-
-    // Date
-    doc.setTextColor(255, 255, 255);
     doc.setFontSize(10);
     doc.text(new Date().toLocaleDateString(), 195, 23, { align: 'right' });
 
-    // Section title
+    // Selected Fan Data
     doc.setTextColor(30, 30, 30);
     doc.setFontSize(13);
     doc.setFont('helvetica', 'bold');
     doc.text('Selected Fan Data', 15, 45);
-
-    // Line under title
     doc.setDrawColor(220, 38, 38);
     doc.setLineWidth(0.8);
     doc.line(15, 47, 195, 47);
 
-    // Data rows
     const rows = [
         ['Fan Name', fanName],
         ['Airflow', airflow],
@@ -460,36 +490,24 @@ async function downloadPDF() {
         y += 14;
     });
 
-    // ---- Page 2: Technical Data (only when we have specs for this model) ----
+    // ---- Technical Data — same page, directly below ----
     const spec = FAN_TECH_SPECS[fanName];
     if (spec) {
-        doc.addPage();
-        doc.setFillColor(220, 38, 38);
-        doc.rect(0, 0, 210, 30, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        doc.text('Prodigy Ventilation Systems', 15, 13);
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'normal');
-        doc.text('Fan Selection Report', 15, 23);
-        doc.setFontSize(10);
-        doc.text(new Date().toLocaleDateString(), 195, 23, { align: 'right' });
-
+        const techTitleY = y + 12;
         doc.setTextColor(30, 30, 30);
         doc.setFontSize(13);
         doc.setFont('helvetica', 'bold');
-        doc.text('Technical Data', 15, 45);
+        doc.text('Technical Data', 15, techTitleY);
         doc.setDrawColor(220, 38, 38);
         doc.setLineWidth(0.8);
-        doc.line(15, 47, 195, 47);
+        doc.line(15, techTitleY + 2, 195, techTitleY + 2);
 
         const cols = [
             { label: 'Model', w: 25 }, { label: 'Airflow (m³/h)', w: 30 },
             { label: 'Voltage (V-/Hz)', w: 40 }, { label: 'Speed (RPM)', w: 25 },
             { label: 'Input power (W)', w: 25 }, { label: 'AMPS (A)', w: 20 }, { label: 'Noise (dB)', w: 15 }
         ];
-        const tableX = 15, tableY = 55;
+        const tableX = 15, tableY = techTitleY + 15;
         doc.setFillColor(230, 230, 230); doc.rect(tableX, tableY - 5, 180, 8, 'F');
         doc.setFontSize(8); doc.setFont('helvetica', 'bold'); doc.setTextColor(30, 30, 30);
         let cx = tableX + 2;
@@ -500,42 +518,68 @@ async function downloadPDF() {
         doc.setFont('helvetica', 'normal'); cx = tableX + 2;
         cols.forEach((c, i) => { doc.text(String(values[i]), cx, tableY + 8); cx += c.w; });
 
-        const imgBoxY = 80;
+        const imgBoxY = tableY + 25;
+
+        // IMAGE — fixed square, keeps original proportions
         try {
-            const imgData = await loadImageAsDataURL(`../Media/${fanName}/1.JPG`);
+            const ext = fanName.toLowerCase().startsWith("ms") ? "PNG" : "JPG";
+
+            const imgData = await loadImageAsDataURL(`../Media/${fanName}/1.${ext}`);
             const format = imgData.startsWith('data:image/png') ? 'PNG' : 'JPEG';
-            doc.addImage(imgData, format, 20, imgBoxY, 70, 60, undefined, 'FAST');
+
+            // Square image area
+            const imgX = 20;
+            const imgY = imgBoxY;
+            const imgSize = 55;
+
+            doc.addImage(
+                imgData,
+                format,
+                imgX,
+                imgY,
+                imgSize,
+                imgSize,
+                undefined,
+                'FAST'
+            );
+
         } catch (e) {
             console.error('Fan image failed to embed in PDF:', e);
         }
+
         doc.setFontSize(8); doc.setTextColor(90, 90, 90);
-        doc.text(`Figure 1. ${fanName}`, 55, imgBoxY + 65, { align: 'center' });
+        doc.text(`Figure 1. ${fanName}`, 47.5, imgBoxY + 62, { align: 'center' });
 
         const fanCurve = (typeof FAN_DATA !== 'undefined') ? FAN_DATA[toFanDataKey(fanName)] : null;
         if (fanCurve) {
             try {
                 const dataset = fanCurve.datasets[0];
-                drawPerformanceChart(doc, 105, imgBoxY, 80, 60, dataset.data, fanCurve.maxX, fanCurve.maxY,
+                drawPerformanceChart(doc, 90, imgBoxY, 100, 60, dataset.data, fanCurve.maxX, fanCurve.maxY,
                     rawAirflowM3h ? { x: rawAirflowM3h, y: fanPressure } : null);
                 doc.setFontSize(8);
-                doc.text(`Figure 2. Performance Curve ${fanName}`, 145, imgBoxY + 65, { align: 'center' });
+                doc.setTextColor(90, 90, 90);
+                doc.text(`Figure 2. Performance Curve ${fanName}`, 140, imgBoxY + 65, { align: 'center' });
             } catch (e) {
                 console.error('Chart draw failed:', e);
             }
         }
+
+        // Note: room usage line (only shown if a room type came through)
+        if (roomType) {
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(30, 30, 30);
+            doc.text(`Note: Fan selected to use in ${roomType}`, 15, imgBoxY + 78);
+        }
     }
 
-    // Footer on every page
-    const pageCount = doc.internal.getNumberOfPages();
-    for (let p = 1; p <= pageCount; p++) {
-        doc.setPage(p);
-        doc.setFillColor(245, 245, 245);
-        doc.rect(0, 280, 210, 17, 'F');
-        doc.setFontSize(9);
-        doc.setTextColor(120, 120, 120);
-        doc.setFont('helvetica', 'normal');
-        doc.text('Prodigy Ventilation Systems — info@prodigysystems.ae — +971 9 228 9674', 105, 290, { align: 'center' });
-    }
+    // Footer
+    doc.setFillColor(245, 245, 245);
+    doc.rect(0, 280, 210, 17, 'F');
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Prodigy Ventilation Systems — info@prodigysystems.ae — +971 9 228 9674', 105, 290, { align: 'center' });
 
     doc.save(`Fan-Report-${fanName}.pdf`);
 }

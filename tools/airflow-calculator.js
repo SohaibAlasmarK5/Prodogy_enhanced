@@ -19,6 +19,25 @@ const roomACH = {
     "Auditorium": [12, 14]
 };
 
+// Human-friendly room names for the PDF note line
+const ROOM_DISPLAY_NAMES = {
+    Basements: 'Basement',
+    Bathrooms: 'Bathroom',
+    Bedrooms: 'Bedroom',
+    Kitchens: 'Kitchen',
+    Laundry: 'Laundry Room',
+    Living: 'Living Room',
+    Offices: 'Office',
+    Conference: 'Conference Room',
+    Server: 'Server Room',
+    Break: 'Break Room',
+    Retail: 'Retail Store',
+    Restaurant: 'Restaurant Dining Area',
+    CommercialKitchen: 'Commercial Kitchen',
+    PublicRestrooms: 'Public Restroom',
+    Auditorium: 'Auditorium'
+};
+
 // Fan Data
 const fansData = {
     hs: [
@@ -274,8 +293,12 @@ function sendToESP() {
     
     // Convert CFM to m³/h for ESP calculator
     const airflow_m3h = airflowCFM * 1.699;
+
+    // Room type for the PDF note line
+    const roomKey = document.getElementById('room').value;
+    const roomDisplay = ROOM_DISPLAY_NAMES[roomKey] || roomKey;
     
     // Build URL with parameters (sf now means Selected Fan)
-    const url = `esp-calculator.html?sf=${encodeURIComponent(fanName)}&af=${airflow_m3h.toFixed(2)}&p=${pressure.toFixed(1)}`;
+    const url = `esp-calculator.html?sf=${encodeURIComponent(fanName)}&af=${airflow_m3h.toFixed(2)}&p=${pressure.toFixed(1)}&room=${encodeURIComponent(roomDisplay)}`;
     window.location.href = url;
 }
